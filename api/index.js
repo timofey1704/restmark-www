@@ -14,10 +14,10 @@ const port = process.env.PORT || 4000
 app.use(cors())
 app.use(bodyParser.json())
 
-app.use('/send-message', sendMessageRoute)
-app.use('/texts', textRoute)
-app.use('/products', productsRoute)
-app.use('/sales', salesRoute)
+app.use('/api/send-message', sendMessageRoute)
+app.use('/api/texts', textRoute)
+app.use('/api/products', productsRoute)
+app.use('/api/sales', salesRoute)
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
