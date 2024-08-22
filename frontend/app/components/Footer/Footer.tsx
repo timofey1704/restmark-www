@@ -12,22 +12,32 @@ export default function Footer() {
           <div className="w-full md:w-1/4 mb-6 md:mb-0">
             <h3 className="text-2xl font-bold mb-4">О нас</h3>
             <ul className="text-gray-400">
-              <li className="mb-2">
+              <li className="mb-1">
                 <Link href="/about-us" className="hover:underline">
                   Информация о компании
                 </Link>
               </li>
-              <li>
+              <li className="mb-1">
                 <Link href="/contact-us" className="hover:underline">
                   Cвязаться с нами
+                </Link>
+              </li>
+              <li>
+                <Link href="/sitemap" className="hover:underline">
+                  Карта сайта
                 </Link>
               </li>
             </ul>
           </div>
           <div className="w-full text-2xl font-bold md:w-1/4 mb-6 md:mb-0">
-            <Link href="/sitemap" className="hover:underline">
-              Карта сайта
-            </Link>
+            <a
+              href="https://drive.google.com/drive/folders/1ifOXzKjgSUeBOZnH6DcxSbfK5QKtGjqQ"
+              className="hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Каталоги
+            </a>
           </div>
 
           <div className="w-full md:w-1/4">
