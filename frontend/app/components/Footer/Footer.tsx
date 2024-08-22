@@ -6,7 +6,7 @@ import { FaTelegram } from 'react-icons/fa6'
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-8 mt-auto">
+    <footer className="bg-black text-white py-8 mt-auto">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex flex-wrap justify-between">
           <div className="w-full md:w-1/4 mb-6 md:mb-0">
