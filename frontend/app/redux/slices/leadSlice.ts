@@ -1,9 +1,14 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 
 interface Lead {
-  name: string
-  number: string
   message: string
+  phone?: string
+  date?: string
+}
+
+interface LeadRequest {
+  url: string
+  data: Lead
 }
 
 // состояние для хранения массива лидов
@@ -19,22 +24,25 @@ const initialState: LeadState = {
   error: null,
 }
 
+// Обновленный `createAsyncThunk` с правильным типом параметра
 export const sendLead = createAsyncThunk(
   'leads/sendLead',
-  async (lead: Lead) => {
-    const response = await fetch('http://localhost:4000/api/send-message', {
+  async (leadRequest: LeadRequest) => {
+    const { url, data } = leadRequest
+
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(lead),
+      body: JSON.stringify(data),
     })
 
     if (!response.ok) {
       throw new Error('Failed to send lead')
     }
 
-    return lead
+    return data
   }
 )
 

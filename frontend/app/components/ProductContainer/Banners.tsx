@@ -11,16 +11,14 @@ const Banners = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Используем axios для выполнения HTTP-запроса
         const { data } = await axios.get(
           'http://localhost:4000/api/products/banners'
         )
 
-        // Преобразуем данные к ожидаемому типу
         setTitles(
           data.map((item: TitleItem) => ({
             title: item.title,
-            img_url: item.img_url, // Исправлено здесь на 'img_url'
+            img_url: item.img_url,
           }))
         )
       } catch (error) {
@@ -37,7 +35,7 @@ const Banners = () => {
         <ProductContainer
           key={index}
           title={item.title}
-          img_url={item.img_url} // Убедитесь, что передаете img_url
+          img_url={item.img_url}
         />
       ))}
     </div>
