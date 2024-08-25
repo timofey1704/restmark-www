@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
@@ -21,6 +22,11 @@ router.post('/', async (req, res) => {
     res.send('Message sent successfully')
   } catch (error) {
     console.log('Error sending message:', error.message)
+
+    if (error.response) {
+      console.log('Error details:', error.response.data)
+    }
+
     res.status(500).send(`Failed to send message: ${error.message}`)
   }
 })
