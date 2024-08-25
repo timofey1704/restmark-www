@@ -15,7 +15,6 @@ const Home = () => {
       </div>
 
       <Banners />
-      <CallButton />
     </main>
   )
 }
