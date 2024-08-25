@@ -19,7 +19,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        'druk-wide': ['"Druk Wide Cyr"', 'sans-serif'],
+        'unbounded-variable': ['"Unbounded Variable"', 'sans-serif'],
+        'fivo-sans': ['"Fivo Sans"', 'sans-serif'],
       },
       colors: {
         banners: '#0C0C0C',

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, ChangeEvent } from 'react'
-import InputMask from 'react-input-mask'
+import InputMask from 'react-input-mask-next'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
 import { toast } from 'react-hot-toast'
@@ -15,12 +15,11 @@ interface LeadPopupContentProps {
 const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
   const [clientName, setClientName] = useState('')
   const [phone, setPhone] = useState('')
-  const [date, setDate] = useState('')
-  const [isTelegram_idEmpty, setIsTelegram_idEmpty] = useState(true)
+  const [isClientNameEmpty, setIsClientNameEmpty] = useState(true)
   const dispatch = useDispatch<AppDispatch>()
 
   const handleTelegramRequest = async () => {
-    if (!phone || !date) {
+    if (!phone || !phone) {
       toast.error('Поля не могут быть пустыми!', { icon: '❗️' })
       return
     }
@@ -30,28 +29,9 @@ const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
     }
 
     try {
-      const response = await dispatch(
-        sendLead({
-          url: 'http://localhost:4000/requests',
-          data: leadDetails,
-        })
-      ).unwrap()
-    } catch (error) {
-      console.error('Ошибка при отправке сообщения:', error)
-      dispatch(
-        showError({
-          message: 'Ошибка при отправке данных!',
-          position: 'top-center',
-        })
-      )
-      console.error('Ошибка при отправке данных:', error)
-      return
-    }
-
-    try {
       await dispatch(
         sendLead({
-          url: 'http://localhost:4000/send-message',
+          url: 'http://localhost:4000/api/send-message',
           data: leadDetails,
         })
       )
@@ -75,7 +55,7 @@ const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
 
   const handleClientNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setClientName(e.target.value)
-    setIsTelegram_idEmpty(e.target.value === '')
+    setIsClientNameEmpty(e.target.value === '')
   }
 
   const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -85,9 +65,9 @@ const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg shadow-lg p-8 relative max-w-md w-full border-2 border-gray-300 mt-8">
+      <div className="bg-white rounded-lg shadow-lg p-8 relative max-w-md w-full border-2 border-gray-300">
         <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
           onClick={onClose}
         >
           &#10005;
@@ -100,17 +80,12 @@ const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
               Ваше имя:
             </label>
             <div className="relative">
-              <span
-                className={`absolute left-3 top-2 text-gray-500 ${
-                  isTelegram_idEmpty ? 'empty' : ''
-                }`}
-              ></span>
               <input
                 type="text"
                 id="clientName"
                 value={clientName}
                 onChange={handleClientNameChange}
-                className="pl-8 pr-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="pl-3 pr-3 py-2 border border-gray-300 text-black rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>

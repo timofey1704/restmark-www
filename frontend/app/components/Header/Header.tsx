@@ -11,11 +11,11 @@ export default function Header() {
           <Image src={HeaderPhoto} alt="header logo" className="ml-20" />
         </Link>
       </div>
-      <div className="flex flex-col text-white mr-20">
+      <div className="flex flex-col text-white mr-20 ">
         <a href="tel:+375 44 790 9381" className="mr-9 hover:underline">
           +375 (44) 790-93-81
+          <div className="text-red-400 cursor-pointer">Заказать звонок</div>
         </a>
-        <div className="text-red-400 cursor-pointer">Заказать звонок</div>
       </div>
     </header>
   )

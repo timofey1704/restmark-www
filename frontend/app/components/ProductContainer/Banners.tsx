@@ -30,7 +30,7 @@ const Banners = () => {
   }, [])
 
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-3">
       {titles.map((item: TitleItem, index: number) => (
         <ProductContainer
           key={index}
