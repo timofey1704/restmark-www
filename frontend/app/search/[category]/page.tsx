@@ -1,6 +1,7 @@
 import React from 'react'
 import ItemCard from '../../components/ItemCard/ItemCard'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
+import ImageSlider from '../../components/ImagesSlider/ImagesSlider'
 
 interface Photo {
   id: number
@@ -68,7 +69,7 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
                   key={product.id}
                   brandName={product.title}
                   collections={collections}
-                  img_url={img_urls}
+                  img_url={<ImageSlider images={img_urls} />}
                   catalog_url={`/products/${product.id}`}
                 />
               )

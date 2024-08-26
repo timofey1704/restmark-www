@@ -11,7 +11,19 @@ interface BreadcrumbsProps {
   category?: string
 }
 
+const categoryDisplayNames: { [key: string]: string } = {
+  steklo: 'Стекло',
+  inventar: 'Инвентарь',
+  bar: 'Бар',
+  sales: 'Акции',
+  farvor: 'Фарфор',
+  'stolovie-pribori': 'Столовые приборы',
+}
+
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ category }) => {
+  const displayName = category
+    ? categoryDisplayNames[category] || category
+    : null
   return (
     <Breadcrumb className="ml-24">
       <BreadcrumbList>
@@ -31,7 +43,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ category }) => {
                 href={`/search/${category}`}
                 className="font-fivo-sans text-xl hover:text-white"
               >
-                {category}
+                {displayName}
               </BreadcrumbLink>
             </BreadcrumbItem>
           </>
