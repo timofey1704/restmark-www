@@ -22,11 +22,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
     <Slider {...settings}>
       {images.map((img, index) => (
         <div key={index}>
-          <img
-            src={img}
-            alt={`Slide ${index}`}
-            className="w-full h-auto object-cover"
-          />
+          <img src={img} alt={`Slide ${index}`} className="w-full h-full" />
         </div>
       ))}
     </Slider>

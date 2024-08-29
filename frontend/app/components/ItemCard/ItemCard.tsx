@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 interface ItemCardProps {
   brandName: string
   collections: string[]
-  img_url: React.ReactNode // Измените тип на React.ReactNode
+  img_url: React.ReactNode
   catalog_url: string
 }
 
@@ -20,7 +20,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   )
 
   return (
-    <div className="bg-banners text-white p-6 max-w-md mx-auto rounded-md shadow-md">
+    <div className="bg-banners text-white p-6 rounded-md shadow-md">
       <div className="mb-6">
         {/* Используйте компонент слайдера */}
         <div className="h-64 w-full mb-4 rounded-md">{img_url}</div>
