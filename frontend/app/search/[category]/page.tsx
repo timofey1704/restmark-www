@@ -30,7 +30,6 @@ interface SearchPageProps {
   products: Product[]
 }
 
-// Function to fetch data from the API
 async function fetchProducts(category: string): Promise<Product[]> {
   try {
     const res = await fetch(`http://localhost:4000/api/products`)
@@ -55,10 +54,9 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
       </h1>
 
       <div className="min-h-screen bg-black text-white py-10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="container px-4">
+          <div className="grid grid-cols-1">
             {products.map((product) => {
-              // Flatten collections and photos for simplicity
               const collections = product.collections.map((col) => col.name)
               const img_urls = product.collections.flatMap((col) =>
                 col.photos.map((photo) => photo.path)
