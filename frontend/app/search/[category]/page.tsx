@@ -69,8 +69,7 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
                   <ItemCard
                     key={product.id}
                     brandName={product.title}
-                    collections={collections}
-                    img_url={<ImageSlider images={img_urls} />}
+                    collections={product.collections}
                     catalog_url={`/products/${product.id}`}
                   />
                 )

@@ -1,28 +1,42 @@
 'use client'
-
 import React, { useState } from 'react'
+import ImageSlider from '../ImagesSlider/ImagesSlider'
+
+interface Photo {
+  id: number
+  filename: string
+  path: string
+}
+
+interface Collection {
+  id: number
+  name: string
+  price: number
+  discount_price: number
+  discount_percent: number
+  photos: Photo[]
+}
 
 interface ItemCardProps {
   brandName: string
-  collections: string[]
-  img_url: React.ReactNode
+  collections: Collection[]
   catalog_url: string
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({
   brandName,
   collections,
-  img_url,
   catalog_url,
 }) => {
-  const [selectedCollection, setSelectedCollection] = useState<string>(
+  const [selectedCollection, setSelectedCollection] = useState<Collection>(
     collections[0]
   )
-
+  const imageUrls = selectedCollection.photos.map((photo) => photo.path)
   return (
     <div className="bg-banners text-white py-4 pl-4 rounded-2xl shadow-md flex">
       <div className="flex-none w-3/5 h-auto rounded-md overflow-hidden">
-        {img_url}
+        {/* Используем компонент ImageSlider для отображения изображений */}
+        <ImageSlider images={imageUrls} />
       </div>
 
       <div className="flex flex-col flex-grow ml-8 justify-between">
@@ -34,16 +48,19 @@ const ItemCard: React.FC<ItemCardProps> = ({
             Выберите коллекцию или посмотрите каталог
           </p>
           <div className="grid grid-cols-2 text-base font-thin font-fivo-sans gap-2 mb-4">
-            {collections.map((collection, index) => (
-              <label key={index} className="flex items-center cursor-pointer">
+            {collections.map((collection) => (
+              <label
+                key={collection.id}
+                className="flex items-center cursor-pointer"
+              >
                 <input
                   type="radio"
                   name="collection"
-                  checked={selectedCollection === collection}
+                  checked={selectedCollection.id === collection.id}
                   onChange={() => setSelectedCollection(collection)}
                   className="mr-2"
                 />
-                {collection}
+                {collection.name}
               </label>
             ))}
           </div>
