@@ -52,7 +52,7 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
                 )
               })
             ) : (
-              <div className="text-center text-2xl text-white">
+              <div className="text-center font-fivo-sans text-2xl text-white">
                 К сожалению, нам пока нечего вам предложить. Следите за
                 объявлениями!
               </div>
