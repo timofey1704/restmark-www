@@ -1,30 +1,7 @@
 import React from 'react'
 import ItemCard from '../../components/ItemCard/ItemCard'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
-import ImageSlider from '../../components/ImagesSlider/ImagesSlider'
-
-interface Photo {
-  id: number
-  filename: string
-  path: string
-}
-
-interface Collection {
-  id: number
-  name: string
-  price: number
-  discount_price: number
-  discount_percent: number
-  photos: Photo[]
-}
-
-interface Product {
-  id: number
-  title: string
-  country_prod: string
-  category: string
-  collections: Collection[]
-}
+import { Product } from '../../types'
 
 async function fetchProducts(): Promise<Product[]> {
   try {

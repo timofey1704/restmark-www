@@ -1,27 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import ImageSlider from '../ImagesSlider/ImagesSlider'
-
-interface Photo {
-  id: number
-  filename: string
-  path: string
-}
-
-interface Collection {
-  id: number
-  name: string
-  price: number
-  discount_price: number
-  discount_percent: number
-  photos: Photo[]
-}
-
-interface ItemCardProps {
-  brandName: string
-  collections: Collection[]
-  catalog_url: string
-}
+import { ItemCardProps, Collection } from '../../types'
 
 const ItemCard: React.FC<ItemCardProps> = ({
   brandName,
@@ -31,11 +11,12 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const [selectedCollection, setSelectedCollection] = useState<Collection>(
     collections[0]
   )
+
   const imageUrls = selectedCollection.photos.map((photo) => photo.path)
+
   return (
     <div className="bg-banners text-white py-4 pl-4 rounded-2xl shadow-md flex">
       <div className="flex-none w-3/5 h-auto rounded-md overflow-hidden">
-        {/* Используем компонент ImageSlider для отображения изображений */}
         <ImageSlider images={imageUrls} />
       </div>
 
@@ -67,12 +48,12 @@ const ItemCard: React.FC<ItemCardProps> = ({
         </div>
 
         <div className="flex">
-          <button className="bg-black py-2 px-4 rounded-md mr-10 hover:bg-gray-700">
+          <button className="border py-4 px-6 rounded-md mr-10 hover:bg-gray-700">
             Посмотреть коллекцию
           </button>
           <a
             href={catalog_url}
-            className="bg-black py-2 px-4 rounded-md hover:bg-gray-700 flex justify-center items-center"
+            className="border py-4 px-6 rounded-md hover:bg-gray-700 flex justify-center items-center"
           >
             Каталог
           </a>

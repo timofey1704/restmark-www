@@ -1,15 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-
-interface Lead {
-  message: string
-  phone?: string
-  date?: string
-}
-
-interface LeadRequest {
-  url: string
-  data: Lead
-}
+import { Lead, LeadRequest } from '@/app/types'
 
 // состояние для хранения массива лидов
 interface LeadState {
