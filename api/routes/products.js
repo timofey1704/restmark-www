@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
             p.id AS product_id,
             p.title,
             p.country_prod,
+            p.category,
             c.id AS collection_id,
             c.name AS collection_name,
             c.price,
@@ -45,6 +46,7 @@ router.get('/', async (req, res) => {
           id: row.product_id,
           title: row.title,
           country_prod: row.country_prod,
+          category: row.category,
           collections: [],
         }
       }

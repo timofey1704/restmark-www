@@ -22,17 +22,13 @@ interface Product {
   id: number
   title: string
   country_prod: string
+  category: string
   collections: Collection[]
 }
 
-interface SearchPageProps {
-  category: string
-  products: Product[]
-}
-
-async function fetchProducts(category: string): Promise<Product[]> {
+async function fetchProducts(): Promise<Product[]> {
   try {
-    const res = await fetch(`http://localhost:4000/api/products`)
+    const res = await fetch('http://localhost:4000/api/products')
     if (!res.ok) {
       throw new Error('Failed to fetch data')
     }
@@ -44,7 +40,13 @@ async function fetchProducts(category: string): Promise<Product[]> {
 }
 
 const SearchPage = async ({ params }: { params: { category: string } }) => {
-  const products = await fetchProducts(params.category)
+  // получаем все продукты
+  const products = await fetchProducts()
+
+  // фильтруем продукты по категории
+  const filteredProducts = products.filter(
+    (product) => product.category === params.category
+  )
 
   return (
     <>
@@ -56,22 +58,29 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
       <div className="min-h-screen bg-black text-white py-10">
         <div className="container px-4">
           <div className="grid grid-cols-1">
-            {products.map((product) => {
-              const collections = product.collections.map((col) => col.name)
-              const img_urls = product.collections.flatMap((col) =>
-                col.photos.map((photo) => photo.path)
-              )
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((product) => {
+                const collections = product.collections.map((col) => col.name)
+                const img_urls = product.collections.flatMap((col) =>
+                  col.photos.map((photo) => photo.path)
+                )
 
-              return (
-                <ItemCard
-                  key={product.id}
-                  brandName={product.title}
-                  collections={collections}
-                  img_url={<ImageSlider images={img_urls} />}
-                  catalog_url={`/products/${product.id}`}
-                />
-              )
-            })}
+                return (
+                  <ItemCard
+                    key={product.id}
+                    brandName={product.title}
+                    collections={collections}
+                    img_url={<ImageSlider images={img_urls} />}
+                    catalog_url={`/products/${product.id}`}
+                  />
+                )
+              })
+            ) : (
+              <div className="text-center text-2xl text-white">
+                К сожалению, нам пока нечего вам предложить. Следите за
+                объявлениями!
+              </div>
+            )}
           </div>
         </div>
       </div>

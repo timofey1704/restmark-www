@@ -24,7 +24,6 @@ const initialState: LeadState = {
   error: null,
 }
 
-// Обновленный `createAsyncThunk` с правильным типом параметра
 export const sendLead = createAsyncThunk(
   'leads/sendLead',
   async (leadRequest: LeadRequest) => {
