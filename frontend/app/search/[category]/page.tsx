@@ -20,10 +20,15 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
   // получаем все продукты
   const products = await fetchProducts()
 
+  // console.log('Fetched Products:', products)
+
   // фильтруем продукты по категории
   const filteredProducts = products.filter(
     (product) => product.category === params.category
   )
+
+  // console.log('Category:', params.category)
+  // console.log('Filtered Products:', filteredProducts)
 
   return (
     <>
