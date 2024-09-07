@@ -57,3 +57,10 @@ export interface LeadRequest {
   url: string
   data: Lead
 }
+
+export interface Customer {
+  id: number
+  customer_name: string
+  img_url: string
+  link: string
+}

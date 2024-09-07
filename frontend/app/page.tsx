@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Banners from './components/ProductContainer/Banners'
 import CallButton from './components/LeadPopup/CallButton'
+import Customers from './components/Customers/Customers'
 
 const Home = () => {
   return (
@@ -13,8 +14,10 @@ const Home = () => {
       <div className="py-6 ml-20 font-fivo-sans font-thin text-lg">
         Мы помогаем реализовывать Ваши идеи
       </div>
-
       <Banners />
+      <div>
+        <Customers />
+      </div>
     </main>
   )
 }

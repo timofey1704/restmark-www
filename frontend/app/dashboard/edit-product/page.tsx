@@ -87,25 +87,27 @@ const EditProductPage = () => {
             <li
               key={product.id}
               className={`border p-4 rounded-md shadow-sm cursor-pointer ${
-                selectedProduct?.id === product.id ? 'bg-gray-200' : ''
+                selectedProduct?.id === product.id ? 'bg-white' : ''
               }`}
               onClick={() => handleSelectProduct(product)}
             >
               <div className="flex justify-between">
-                <div className="text-lg font-medium">{product.title}</div>
+                <div className="text-lg font-medium text-black">
+                  Продукт - {product.title}
+                </div>
                 <FaEdit />
               </div>
               {selectedProduct?.id === product.id && (
                 <div className="mt-4">
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-black">
                       Название продукта
                     </label>
                     <input
                       type="text"
                       value={selectedProduct.title}
                       onChange={(e) => handleInputChange(e, 'title')}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
 
