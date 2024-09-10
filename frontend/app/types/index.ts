@@ -35,6 +35,7 @@ export interface Product {
   country_prod: string
   category: string
   collections: Collection[]
+  pdf: string
 }
 
 export interface ItemCardProps {

@@ -7,7 +7,7 @@ async function fetchProducts(): Promise<Product[]> {
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
 
   try {
-    const res = await fetch(`${API_URL}/products`)
+    const res = await fetch(`${API_URL}/items`)
     if (!res.ok) {
       throw new Error('Failed to fetch data')
     }
@@ -48,7 +48,7 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
                     key={product.id}
                     brandName={product.title}
                     collections={product.collections}
-                    catalog_url={`/products/${product.id}`}
+                    catalog_url={`${product.pdf}`}
                   />
                 )
               })

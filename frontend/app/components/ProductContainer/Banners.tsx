@@ -13,7 +13,7 @@ const Banners = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${API_URL}/products/banners`)
+        const { data } = await axios.get(`${API_URL}/banners`)
 
         setTitles(data)
       } catch (error) {
