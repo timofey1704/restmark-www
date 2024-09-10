@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const AddProductPage = () => {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+
   const [title, setTitle] = useState('')
   const [countryProd, setCountryProd] = useState('')
   const [category, setCategory] = useState('')
@@ -60,7 +62,7 @@ const AddProductPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:4000/api/products/create', {
+      await axios.post(`${API_URL}/products/create`, {
         title,
         country_prod: countryProd,
         category,

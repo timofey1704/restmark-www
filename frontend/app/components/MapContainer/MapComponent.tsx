@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
-// Динамический импорт зависимостей для Leaflet
+// динамический импорт зависимостей для Leaflet
 const MapContainer = dynamic(
   () => import('react-leaflet').then((mod) => mod.MapContainer),
   {

@@ -5,11 +5,12 @@ import { Customer } from '@/app/types'
 
 const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([])
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/customers')
+        const response = await axios.get(`${API_URL}/customers`)
         setCustomers(response.data)
       } catch (error) {
         console.error('Error fetching customers', error)

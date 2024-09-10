@@ -4,8 +4,10 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import { Product } from '../../types'
 
 async function fetchProducts(): Promise<Product[]> {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+
   try {
-    const res = await fetch('http://localhost:4000/api/products')
+    const res = await fetch(`${API_URL}/products`)
     if (!res.ok) {
       throw new Error('Failed to fetch data')
     }
@@ -20,16 +22,10 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
   // получаем все продукты
   const products = await fetchProducts()
 
-  // console.log('Fetched Products:', products)
-
   // фильтруем продукты по категории
   const filteredProducts = products.filter(
     (product) => product.category === params.category
   )
-
-  // console.log('Category:', params.category)
-  // console.log('Filtered Products:', filteredProducts)
-
   return (
     <>
       <Breadcrumbs category={params.category} />

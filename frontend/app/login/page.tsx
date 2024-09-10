@@ -9,6 +9,8 @@ import { showSuccess, showError } from '../redux/slices/notificationSlice'
 import withReduxProvider from '../components/HOC/withReduxProvider'
 
 const Login = () => {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+
   const dispatch = useDispatch()
   const router = useRouter()
   const [username, setUsername] = useState('')
@@ -17,7 +19,7 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:4000/api/login', {
+      const response = await axios.post(`${API_URL}/login`, {
         username,
         password,
       })

@@ -7,14 +7,13 @@ import Link from 'next/link'
 import { TitleItem } from '../../types/index'
 
 const Banners = () => {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
   const [titles, setTitles] = useState<TitleItem[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          'http://localhost:4000/api/products/banners'
-        )
+        const { data } = await axios.get(`${API_URL}/products/banners`)
 
         setTitles(data)
       } catch (error) {

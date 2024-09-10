@@ -1,12 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import { Lead, LeadRequest } from '@/app/types'
-
-// состояние для хранения массива лидов
-interface LeadState {
-  leads: Lead[]
-  status: 'idle' | 'loading' | 'succeeded' | 'failed'
-  error: string | null
-}
+import { Lead, LeadRequest, LeadState } from '@/app/types'
 
 const initialState: LeadState = {
   leads: [],

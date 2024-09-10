@@ -6,6 +6,7 @@ import { FaTrash } from 'react-icons/fa'
 
 const DeleteProductPage = () => {
   const [products, setProducts] = useState<any[]>([])
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,7 +24,7 @@ const DeleteProductPage = () => {
   const handleDelete = async (id: number) => {
     if (confirm('Вы уверены, что хотите удалить этот продукт?')) {
       try {
-        await axios.delete(`http://localhost:4000/api/products/${id}`)
+        await axios.delete(`${API_URL}/products/${id}`)
         setProducts(products.filter((product) => product.id !== id))
         alert('Продукт удален успешно')
       } catch (error) {

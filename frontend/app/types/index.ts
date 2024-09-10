@@ -53,6 +53,12 @@ export interface Lead {
   date?: string
 }
 
+export interface LeadState {
+  leads: Lead[]
+  status: 'idle' | 'loading' | 'succeeded' | 'failed'
+  error: string | null
+}
+
 export interface LeadRequest {
   url: string
   data: Lead

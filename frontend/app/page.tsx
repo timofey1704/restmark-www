@@ -15,9 +15,8 @@ const Home = () => {
         Мы помогаем реализовывать Ваши идеи
       </div>
       <Banners />
-      <div>
-        <Customers />
-      </div>
+
+      <Customers />
     </main>
   )
 }
