@@ -12,7 +12,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
     collections[0]
   )
 
-  const imageUrls = selectedCollection.photos.map((photo) => photo.path)
+  const defaultImageUrl = 'https://i.ibb.co/7tvdz4K/no-photo.png'
+  const imageUrls = selectedCollection.photos.length
+    ? selectedCollection.photos.map((photo) => photo.path)
+    : [defaultImageUrl]
 
   return (
     <div className="bg-banners text-white py-4 pl-4 rounded-2xl shadow-md flex">

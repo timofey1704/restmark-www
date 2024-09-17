@@ -12,7 +12,7 @@ interface ImageSliderProps {
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: images.length > 1, // иначе могут возникнуть дубли defaultPhoto
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
