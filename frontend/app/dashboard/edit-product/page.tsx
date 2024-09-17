@@ -13,7 +13,7 @@ const EditProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/products')
+        const response = await axios.get('http://localhost:4000/api/items')
         setProducts(response.data)
       } catch (error) {
         console.error('Error fetching products:', error)
@@ -64,7 +64,12 @@ const EditProductPage = () => {
     if (!selectedProduct) return
 
     try {
-      await axios.put(`/api/products/${selectedProduct.id}`, selectedProduct)
+      const API_URL =
+        process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+      await axios.put(
+        `${API_URL}/products/${selectedProduct.id}`,
+        selectedProduct
+      )
       setProducts(
         products.map((product) =>
           product.id === selectedProduct.id ? selectedProduct : product
@@ -92,7 +97,7 @@ const EditProductPage = () => {
               onClick={() => handleSelectProduct(product)}
             >
               <div className="flex justify-between">
-                <div className="text-lg font-medium text-black">
+                <div className="text-lg font-medium text-white">
                   Продукт - {product.title}
                 </div>
                 <FaEdit />
