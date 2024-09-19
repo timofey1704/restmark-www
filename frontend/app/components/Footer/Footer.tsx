@@ -22,11 +22,11 @@ export default function Footer() {
                   Cвязаться с нами
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/sitemap" className="hover:underline">
                   Карта сайта
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="w-full text-2xl font-bold md:w-1/4 mb-6 md:mb-0">

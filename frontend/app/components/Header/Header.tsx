@@ -19,7 +19,7 @@ export default function Header() {
       <div className="flex flex-col text-white mr-20 ">
         <a href="tel:+375 44 790 9381" className="mr-9 hover:underline">
           +375 (44) 790-93-81
-          <div className="text-red-400 cursor-pointer">Заказать звонок</div>
+          <div className="text-red-400 cursor-pointer">Позвонить нам</div>
         </a>
       </div>
     </header>
