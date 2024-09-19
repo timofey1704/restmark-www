@@ -5,13 +5,13 @@ import Customers from './components/Customers/Customers'
 
 const Home = () => {
   return (
-    <main className="">
-      <div className="font-bold font-unbounded-variable text-6xl ml-20">
+    <main className="px-4 sm:px-6 lg:px-8">
+      <div className="font-bold font-unbounded-variable text-3xl sm:text-5xl md:text-5xl lg:text-6xl mb-4">
         <p>Комплексное оснащение</p>
         <p>ресторанов, баров и гостинниц</p>
       </div>
 
-      <div className="py-6 ml-20 font-fivo-sans font-thin text-lg">
+      <div className="py-4 font-fivo-sans font-thin text-base lg:text-lg sm:text-sm">
         Мы помогаем реализовывать Ваши идеи
       </div>
       <Banners />

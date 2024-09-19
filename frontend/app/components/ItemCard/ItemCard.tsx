@@ -18,20 +18,20 @@ const ItemCard: React.FC<ItemCardProps> = ({
     : [defaultImageUrl]
 
   return (
-    <div className="bg-banners text-white py-4 pl-4 rounded-2xl shadow-md flex">
-      <div className="flex-none w-3/5 h-auto rounded-md overflow-hidden">
+    <div className="bg-banners text-white py-4 px-4 rounded-2xl shadow-md flex flex-col md:flex-row">
+      <div className="w-full md:w-3/5 h-64 md:h-auto rounded-md overflow-hidden mb-4 md:mb-0">
         <ImageSlider images={imageUrls} />
       </div>
 
-      <div className="flex flex-col flex-grow ml-8 justify-between">
+      <div className="flex flex-col flex-grow md:ml-8 justify-between">
         <div>
-          <h2 className="text-5xl font-unbounded-variable font-bold">
+          <h2 className="text-3xl md:text-5xl font-unbounded-variable font-bold mb-4">
             {brandName}
           </h2>
           <p className="text-base font-thin font-fivo-sans my-3">
             Выберите коллекцию или посмотрите каталог
           </p>
-          <div className="grid grid-cols-2 text-base font-thin font-fivo-sans gap-2 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 text-base font-thin font-fivo-sans gap-2 mb-4">
             {collections.map((collection) => (
               <label
                 key={collection.id}
@@ -50,13 +50,13 @@ const ItemCard: React.FC<ItemCardProps> = ({
           </div>
         </div>
 
-        <div className="flex">
-          <button className="border py-4 px-6 rounded-md mr-10 hover:bg-gray-700">
+        <div className="flex flex-col sm:flex-row gap-4">
+          <button className="border py-2 px-4 rounded-md hover:bg-gray-700 w-full sm:w-auto">
             Посмотреть коллекцию
           </button>
           <a
             href={catalog_url}
-            className="border py-4 px-6 rounded-md hover:bg-gray-700 flex justify-center items-center"
+            className="border py-2 px-4 rounded-md hover:bg-gray-700 flex justify-center items-center w-full sm:w-auto"
           >
             Каталог
           </a>
