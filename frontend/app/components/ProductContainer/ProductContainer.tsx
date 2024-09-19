@@ -11,7 +11,7 @@ const ProductContainer: React.FC<ProductDisplayProps> = ({
         <img src={img_url} alt={title} className="w-full h-full object-cover" />
       </div>
 
-      <div className="absolute bottom-4 left-4 ml-3 mb-4 text-white font-unbounded-variable text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-bold">
+      <div className="absolute bottom-4 left-4 ml-3 mb-4 text-white font-unbounded-variable text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold">
         {title}
       </div>
     </div>

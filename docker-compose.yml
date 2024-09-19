@@ -1,0 +1,116 @@
+services:
+  restmark-frontend-app:
+    build:
+      context: frontend/.
+    #    image: restmark-frontend
+    container_name: restmark-frontend-app
+    environment:
+      DB_PORT: ${DB_PORT}
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USER: ${DB_USER}
+      BOT_TOKEN: ${BOT_TOKEN}
+      CHAT_ID: ${BOT_TOKEN}
+      JWT_SECRET: ${BOT_TOKEN}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+    env_file:
+      - ./.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - 3000:3000
+    networks:
+      - restmark
+  restmark-api-app:
+    build:
+      context: api/.
+    #    image: restmark-api
+    container_name: restmark-api-app
+    environment:
+      DB_PORT: ${DB_PORT}
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USER: ${DB_USER}
+      BOT_TOKEN: ${BOT_TOKEN}
+      CHAT_ID: ${BOT_TOKEN}
+      JWT_SECRET: ${BOT_TOKEN}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+    env_file:
+      - ./.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - 4000:4000
+    networks:
+      - restmark
+
+  #  pgadmin-app:
+  #    image: dpage/pgadmin4
+  #    container_name: pgadmin-app
+  #    environment:
+  #      DB_PORT: ${DB_PORT}
+  #      DB_HOST: ${DB_HOST}
+  #      DB_NAME: ${DB_NAME}
+  #      DB_PASSWORD: ${DB_PASSWORD}
+  #      DB_USER: ${DB_USER}
+  #      BOT_TOKEN: ${BOT_TOKEN}
+  #      CHAT_ID: ${BOT_TOKEN}
+  #      JWT_SECRET: ${BOT_TOKEN}
+  #      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+  #      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #      PGADMIN_DEFAULT_PASSWORD: password
+  #    depends_on:
+  #      postgres:
+  #        condition: service_healthy
+  #    ports:
+  #      - 81:80
+  #    networks:
+  #      - restmark
+
+  caddy:
+    image: caddy:alpine
+    container_name: restmark-caddy-server
+    depends_on:
+      - restmark-frontend-app
+    ports:
+      - 80:80
+    volumes:
+      - caddy-config:/config
+      - caddy-data:/data
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    networks:
+      - restmark
+
+  postgres:
+    image: postgres:alpine
+    restart: always
+    container_name: restmark-db
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: [CMD-SHELL, "sh -c 'pg_isready -U ${DB_USER} -d ${DB_NAME}'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 5432:5432
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - restmark
+
+volumes:
+  pg-data:
+  caddy-config:
+  caddy-data:
+
+networks:
+  restmark:
