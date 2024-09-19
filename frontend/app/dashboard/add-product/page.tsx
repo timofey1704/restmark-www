@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const AddProductPage = () => {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
 
   const [title, setTitle] = useState('')
   const [countryProd, setCountryProd] = useState('')

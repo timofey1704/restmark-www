@@ -4,7 +4,7 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import { Product } from '../../types'
 
 async function fetchProducts(): Promise<Product[]> {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
 
   try {
     const res = await fetch(`${API_URL}/items`)

@@ -5,7 +5,8 @@ interface SeoText {
 
 export async function fetchSeoTexts(): Promise<{ [key: string]: string }> {
   try {
-    const response = await fetch('http://localhost:4000/api/texts')
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+    const response = await fetch(`${API_URL}/texts`)
     if (!response.ok) {
       throw new Error('Network response failed')
     }

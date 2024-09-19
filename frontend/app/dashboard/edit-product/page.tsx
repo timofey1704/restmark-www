@@ -13,7 +13,8 @@ const EditProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/items')
+        const API_URL = process.env.NEXT_PUBLIC_API_URL
+        const response = await axios.get(`${API_URL}/items`)
         setProducts(response.data)
       } catch (error) {
         console.error('Error fetching products:', error)
@@ -64,8 +65,7 @@ const EditProductPage = () => {
     if (!selectedProduct) return
 
     try {
-      const API_URL =
-        process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+      const API_URL = process.env.NEXT_PUBLIC_API_URL
       await axios.put(
         `${API_URL}/products/${selectedProduct.id}`,
         selectedProduct

@@ -13,7 +13,7 @@ interface LeadPopupContentProps {
 }
 
 const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
   const [clientName, setClientName] = useState('')
   const [phone, setPhone] = useState('')
   const [isClientNameEmpty, setIsClientNameEmpty] = useState(true)
