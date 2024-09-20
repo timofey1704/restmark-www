@@ -6,17 +6,14 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-
-interface BreadcrumbsProps {
-  category?: string
-}
+import { BreadcrumbsProps } from '@/app/types'
 
 const categoryDisplayNames: { [key: string]: string } = {
   steklo: 'Стекло',
   inventar: 'Инвентарь',
   bar: 'Бар',
   sales: 'Акции',
-  farvor: 'Фарфор',
+  farfor: 'Фарфор',
   'stolovie-pribori': 'Столовые приборы',
 }
 
@@ -25,11 +22,11 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ category }) => {
     ? categoryDisplayNames[category] || category
     : null
   return (
-    <Breadcrumb className="ml-24">
+    <Breadcrumb className="ml-4 sm:ml-8 sm:text-xs md:ml-16 lg:ml-24">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink
-            className="font-fivo-sans text-xl hover:text-white"
+            className="font-fivo-sans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white"
             href="/"
           >
             Главная
@@ -38,10 +35,10 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ category }) => {
         <BreadcrumbSeparator />
         {category && (
           <>
-            <BreadcrumbItem className="font-fivo-sans text-xl hover:text-white">
+            <BreadcrumbItem className="font-fivo-sans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white">
               <BreadcrumbLink
                 href={`/search/${category}`}
-                className="font-fivo-sans text-xl hover:text-white"
+                className="font-fivo-sans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white"
               >
                 {displayName}
               </BreadcrumbLink>

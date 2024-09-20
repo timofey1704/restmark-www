@@ -71,3 +71,7 @@ export interface Customer {
   img_url: string
   link: string
 }
+
+export interface BreadcrumbsProps {
+  category?: string
+}
