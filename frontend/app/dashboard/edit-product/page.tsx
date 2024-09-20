@@ -9,12 +9,12 @@ const EditProductPage = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [isEditing, setIsEditing] = useState<boolean>(false)
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL
-        const response = await axios.get(`${API_URL}/items`)
+        const response = await axios.get(`${API_URL}/products/get`)
         setProducts(response.data)
       } catch (error) {
         console.error('Error fetching products:', error)

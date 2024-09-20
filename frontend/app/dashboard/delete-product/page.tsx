@@ -11,7 +11,7 @@ const DeleteProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('${API_URL}/items')
+        const response = await axios.get(`${API_URL}/products/get`)
         setProducts(response.data)
       } catch (error) {
         console.error('Error fetching products:', error)

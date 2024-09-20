@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 app.use('/api/send-message', sendMessageRoute)
 app.use('/api/texts', textRoute)
-app.use('/api/products', productsRoute)
+app.use('/api/products', authenticateToken, productsRoute)
 app.use('/api/sales', salesRoute)
 app.use('/api/login', loginRoute)
 app.use('/api/customers', customersRouter)

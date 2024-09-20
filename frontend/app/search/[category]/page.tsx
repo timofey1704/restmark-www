@@ -29,7 +29,7 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
   return (
     <>
       <Breadcrumbs category={params.category} />
-      <h1 className="font-bold font-unbounded-variable text-6xl ml-24 mt-5">
+      <h1 className="font-bold font-unbounded-variable text-4xl sm:text-5xl md:text-6xl mx-4 sm:mx-8 md:mx-16 lg:mx-24 mt-5 text-center sm:text-left">
         Бренды
       </h1>
 
