@@ -7,7 +7,6 @@ import { Customer } from '@/app/types'
 const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([])
   const API_URL = process.env.NEXT_PUBLIC_API_URL
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,8 +16,10 @@ const Customers = () => {
         console.error('Error fetching customers', error)
       }
     }
-    fetchData()
-  }, [])
+    if (API_URL) {
+      fetchData()
+    }
+  }, [API_URL])
 
   return (
     <div className="container mx-auto px-4 py-8">
