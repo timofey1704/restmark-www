@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Image from 'next/image'
 import { FaEdit, FaSave } from 'react-icons/fa'
 import { Product, Collection } from '@/app/types'
 
@@ -151,11 +152,20 @@ const EditProductPage = () => {
                       {/* Фотографии */}
                       {collection.photos.map((photo) => (
                         <div key={photo.id} className="mt-2">
-                          <img
+                          <Image
+                            src={photo.path}
+                            alt={photo.filename}
+                            height={1078}
+                            width={565}
+                            className="w-32 h-32 object-cover"
+                            priority
+                          />
+
+                          {/* <img
                             src={photo.path}
                             alt={photo.filename}
                             className="w-32 h-32 object-cover"
-                          />
+                          /> */}
                         </div>
                       ))}
                     </div>

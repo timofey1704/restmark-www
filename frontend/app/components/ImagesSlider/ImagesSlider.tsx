@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Slider from 'react-slick'
+import Image from 'next/image'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
@@ -22,7 +23,16 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
     <Slider {...settings}>
       {images.map((img, index) => (
         <div key={index}>
-          <img src={img} alt={`Slide ${index}`} className="w-full h-full" />
+          <Image
+            src={img}
+            alt={`Slide ${index}`}
+            height={1078}
+            width={565}
+            className="w-full h-full"
+            priority={index === 0}
+          />
+
+          {/* <img src={img} alt={`Slide ${index}`} className="w-full h-full" /> */}
         </div>
       ))}
     </Slider>

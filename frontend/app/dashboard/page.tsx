@@ -1,9 +1,23 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const page = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        router.push('/login')
+      }
+    }
+
+    checkAuth()
+  }, [router])
+
   return (
     <>
       <h1 className="text-white text-5xl p-5">Доступный функционал:</h1>

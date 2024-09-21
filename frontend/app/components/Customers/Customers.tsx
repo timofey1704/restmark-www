@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Image from 'next/image'
 import { Customer } from '@/app/types'
 
 const Customers = () => {
@@ -35,10 +36,13 @@ const Customers = () => {
             className="bg-white p-6 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl no-underline"
           >
             <div className="flex items-center justify-center mb-4 text-4xl">
-              <img
+              <Image
                 src={customer.img_url}
                 alt={customer.customer_name}
+                height={1078} // замени на нужные!
+                width={565} // замени на нужные!
                 className="rounded-lg object-cover"
+                priority
               />
             </div>
 
