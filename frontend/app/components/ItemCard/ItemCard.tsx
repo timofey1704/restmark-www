@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import ImageSlider from '../ImagesSlider/ImagesSlider'
 import { ItemCardProps, Collection } from '../../types'
+import CallButton from '../LeadPopup/CallButton'
 
 const ItemCard: React.FC<ItemCardProps> = ({
   brandName,
@@ -12,15 +13,26 @@ const ItemCard: React.FC<ItemCardProps> = ({
     collections[0]
   )
 
-  const defaultImageUrl = 'https://i.ibb.co/7tvdz4K/no-photo.png'
+  const defaultImageUrl = 'https://i.ibb.co/jyNWgb5/image-2.webp'
   const imageUrls = selectedCollection.photos.length
     ? selectedCollection.photos.map((photo) => photo.path)
     : [defaultImageUrl]
 
   return (
     <div className="bg-banners text-white py-4 px-4 rounded-2xl shadow-md flex flex-col md:flex-row">
-      <div className="w-full md:w-3/5 h-64 md:h-auto rounded-md overflow-hidden mb-4 md:mb-0">
+      <div className="relative w-full md:w-3/5 h-64 md:h-auto rounded-md overflow-hidden mb-4 md:mb-0">
         <ImageSlider images={imageUrls} />
+        {!selectedCollection.photos.length && (
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+            <span className="text-white text-center text-opacity-70 text-sm sm:text-base md:text-xl">
+              Фотографии коллекции еще не загружены.
+            </span>
+            <span className="text-white text-center text-opacity-70 text-sm sm:text-base md:text-xl">
+              Пожалуйста, <CallButton text="свяжитесь с нами" /> и мы вышлем
+              фото Вам на почту.
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col flex-grow md:ml-8 justify-between">

@@ -1,6 +1,5 @@
 import React from 'react'
 import Banners from './components/ProductContainer/Banners'
-import CallButton from './components/LeadPopup/CallButton'
 import Customers from './components/Customers/Customers'
 
 const Home = () => {

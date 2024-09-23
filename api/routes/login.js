@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
       const user = result.rows[0]
 
       if (!user.is_active) {
-        return res.status(200).json({
+        return res.status(403).json({
           success: false,
           message: 'Пользователь неактивен',
           reason: 'USER_NOT_ACTIVE',

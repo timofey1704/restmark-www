@@ -75,3 +75,7 @@ export interface Customer {
 export interface BreadcrumbsProps {
   category?: string
 }
+
+export interface CallButtonProps {
+  text: string
+}
