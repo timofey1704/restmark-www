@@ -1,9 +1,9 @@
-http://185.251.38.139 {
+restmark.by {
     reverse_proxy restmark-frontend-app:3000
 }
-http://185.251.38.139/api/* {
+restmark.by/api/* {
     reverse_proxy restmark-api-app:4000
 }
-http://185.251.38.139/api {
+restmark.by/api {
     reverse_proxy restmark-api-app:4000
 }

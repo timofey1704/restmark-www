@@ -31,8 +31,6 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
             className="w-full h-full"
             priority={index === 0}
           />
-
-          {/* <img src={img} alt={`Slide ${index}`} className="w-full h-full" /> */}
         </div>
       ))}
     </Slider>

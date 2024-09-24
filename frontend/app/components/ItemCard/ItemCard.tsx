@@ -24,10 +24,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
         <ImageSlider images={imageUrls} />
         {!selectedCollection.photos.length && (
           <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-            <span className="text-white text-center text-opacity-70 text-sm sm:text-base md:text-xl">
+            <span className="text-white text-center font-fivo-sans text-opacity-70 text-sm sm:text-base md:text-xl">
               Фотографии коллекции еще не загружены.
             </span>
-            <span className="text-white text-center text-opacity-70 text-sm sm:text-base md:text-xl">
+            <span className="text-white text-center font-fivo-sans text-opacity-70 text-sm sm:text-base md:text-xl">
               Пожалуйста, <CallButton text="свяжитесь с нами" /> и мы вышлем
               фото Вам на почту.
             </span>
