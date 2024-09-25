@@ -19,10 +19,14 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const response = await axios.post(`${API_URL}/login`, {
-        username,
-        password,
-      })
+      const response = await axios.post(
+        `${API_URL}/login`,
+        {
+          username,
+          password,
+        },
+        { withCredentials: true }
+      )
 
       if (response.status === 200 && response.data.success) {
         const { token, user } = response.data

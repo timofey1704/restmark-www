@@ -19,7 +19,7 @@ const ProductContainer: React.FC<ProductDisplayProps> = ({
         />
       </div>
 
-      <div className="absolute bottom-4 left-4 ml-3 mb-4 text-white font-unbounded-variable text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold">
+      <div className="absolute bottom-4 left-4 ml-3 mb-4 text-white font-unbounded-variable text-2xl sm:text-4xl md:text-3xl lg:text-4xl font-bold">
         {title}
       </div>
     </div>

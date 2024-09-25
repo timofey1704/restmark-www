@@ -13,6 +13,8 @@ const Banners = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // 'http://localhost:4000/api/'
+        // `${API_URL}/`
         const { data } = await axios.get(`${API_URL}/banners`)
 
         setTitles(data)

@@ -17,7 +17,21 @@ const authenticateToken = require('./middlewares/authMiddleware')
 const app = express()
 const port = process.env.PORT || 4000
 
-app.use(cors())
+const corsOptions = {
+  origin: function (origin, callback) {
+    // разрешаем запросы с локалхоста и продакшн-домена
+    const whitelist = ['http://localhost:3000', 'https://restmark.by']
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true, // разрешаем передачу cookie при необходимости
+}
+
+app.use(cors(corsOptions))
+
 app.use(bodyParser.json())
 
 app.use('/api/send-message', sendMessageRoute)
