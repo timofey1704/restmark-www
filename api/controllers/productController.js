@@ -1,6 +1,7 @@
 const { Pool } = require('pg')
 const multer = require('multer')
 const path = require('path')
+const fs = require('fs')
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -10,10 +11,17 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 })
 
+//путь к директории картинок
+const uploadPath = path.join(__dirname, '/root/restmark/uploads/')
+
+// проверяем, существует ли директория, и создаем ее, если нет
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true }) // recursive: true создаст вложенные директории, если их нет
+}
+
 // загружаем изображения для хранения на сервере
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '/root/restmark/uploads/')
     cb(null, uploadPath)
   },
   filename: (req, file, cb) => {

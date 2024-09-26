@@ -114,6 +114,7 @@ volumes:
   pg-data:
   caddy-config:
   caddy-data:
+  restmark-api-app-uploads:
 
 networks:
   restmark:
