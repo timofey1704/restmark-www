@@ -13,7 +13,7 @@ const pool = new Pool({
 // загружаем изображения для хранения на сервере
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '../uploads/products')
+    const uploadPath = path.join(__dirname, '/root/restmark/uploads/')
     cb(null, uploadPath)
   },
   filename: (req, file, cb) => {
@@ -25,7 +25,17 @@ const upload = multer({ storage })
 
 // создаем новый продукт
 exports.createProduct = [
-  upload.array('photos'), // Принимаем несколько изображений с ключом 'photos'
+  upload.fields([
+    { name: 'photos[0]', maxCount: 10 },
+    { name: 'photos[1]', maxCount: 10 },
+    { name: 'photos[2]', maxCount: 10 },
+    { name: 'photos[3]', maxCount: 10 },
+    { name: 'photos[4]', maxCount: 10 },
+    { name: 'photos[5]', maxCount: 10 },
+    { name: 'photos[6]', maxCount: 10 },
+    { name: 'photos[7]', maxCount: 10 },
+    // и т.д., если ожидаем больше коллекций
+  ]), // принимаем несколько изображений с ключами 'photos[0]', 'photos[1]' и т.д.
   async (req, res) => {
     const { title, country_prod, category, collections } = req.body
     const client = await pool.connect()
@@ -33,32 +43,35 @@ exports.createProduct = [
     try {
       await client.query('BEGIN')
 
-      // Вставляем новый продукт
+      // вставляем новый продукт
       const productResult = await client.query(
         'INSERT INTO products (title, country_prod, category) VALUES ($1, $2, $3) RETURNING *',
         [title, country_prod, category]
       )
       const product = productResult.rows[0]
 
-      // Обрабатываем коллекции
-      for (const collection of collections) {
+      // обрабатываем коллекции
+      for (let i = 0; i < collections.length; i++) {
+        const collection = collections[i]
         const { name, price, discount_price } = collection
 
-        // Вставляем коллекцию, связанную с продуктом
+        // вставляем коллекцию, связанную с продуктом
         const collectionResult = await client.query(
           'INSERT INTO collections (name, price, discount_price, product_id) VALUES ($1, $2, $3, $4) RETURNING *',
           [name, price, discount_price, product.id]
         )
         const collectionData = collectionResult.rows[0]
 
-        // Если есть фотографии в запросе
-        const uploadedFiles = req.files // Файлы, загруженные через 'multer'
+        //  если есть фотографии для данной коллекции
+        const collectionPhotos = req.files[`photos[${i}]`] // получаем файлы для конкретной коллекции
 
-        for (const file of uploadedFiles) {
-          await client.query(
-            'INSERT INTO photos (filename, path, collection_id) VALUES ($1, $2, $3)',
-            [file.filename, file.path, collectionData.id]
-          )
+        if (collectionPhotos) {
+          for (const file of collectionPhotos) {
+            await client.query(
+              'INSERT INTO photos (filename, path, collection_id) VALUES ($1, $2, $3)',
+              [file.filename, file.path, collectionData.id]
+            )
+          }
         }
       }
 
@@ -73,6 +86,7 @@ exports.createProduct = [
     }
   },
 ]
+
 // изменяем существующий продукт
 exports.updateProduct = [
   upload.array('photos'), // Мидлвар для загрузки изображений

@@ -79,10 +79,16 @@ const EditProductPage = () => {
     if (!selectedProduct) return
 
     try {
+      const token = localStorage.getItem('token')
       const API_URL = process.env.NEXT_PUBLIC_API_URL
       await axios.put(
         `${API_URL}/products/${selectedProduct.id}`,
-        selectedProduct
+        selectedProduct,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
       )
       setProducts(
         products.map((product) =>

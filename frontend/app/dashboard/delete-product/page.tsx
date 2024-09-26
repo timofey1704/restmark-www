@@ -37,7 +37,12 @@ const DeleteProductPage = () => {
   const handleDelete = async (id: number) => {
     if (confirm('Вы уверены, что хотите удалить этот продукт?')) {
       try {
-        await axios.delete(`${API_URL}/products/${id}`)
+        const token = localStorage.getItem('token')
+        await axios.delete(`${API_URL}/products/${id}`, {
+          headers: {
+            Authorization: token,
+          },
+        })
         setProducts(products.filter((product) => product.id !== id))
         alert('Продукт удален успешно')
       } catch (error) {

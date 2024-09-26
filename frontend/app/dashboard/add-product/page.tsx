@@ -15,7 +15,7 @@ const AddProductPage = () => {
       name: '',
       price: 0,
       discount_price: 0,
-      photos: [{ filename: '', path: '' }],
+      photos: [{ filename: '' }],
     },
   ])
   const [isLoading, setIsLoading] = useState(false)
@@ -32,15 +32,28 @@ const AddProductPage = () => {
     setCollections(updatedCollections)
   }
 
-  const handlePhotoChange = (
+  const handleFileChange = (
     colIndex: number,
     photoIndex: number,
-    field: string,
-    value: string
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const updatedCollections = [...collections]
+      updatedCollections[colIndex].photos[photoIndex].filename = file.name // cохраняем имя файла
+      setCollections(updatedCollections)
+    }
+  }
+
+  const handleRemovePhoto = (colIndex: number, photoIndex: number) => {
     const updatedCollections = [...collections]
-    // @ts-ignore
-    updatedCollections[colIndex].photos[photoIndex][field] = value
+    updatedCollections[colIndex].photos[photoIndex].filename = '' // cбрасываем имя файла
+    setCollections(updatedCollections)
+  }
+
+  const handleAddPhoto = (colIndex: number) => {
+    const updatedCollections = [...collections]
+    updatedCollections[colIndex].photos.push({ filename: '' })
     setCollections(updatedCollections)
   }
 
@@ -51,15 +64,9 @@ const AddProductPage = () => {
         name: '',
         price: 0,
         discount_price: 0,
-        photos: [{ filename: '', path: '' }],
+        photos: [{ filename: '' }],
       },
     ])
-  }
-
-  const addPhoto = (index: number) => {
-    const updatedCollections = [...collections]
-    updatedCollections[index].photos.push({ filename: '', path: '' })
-    setCollections(updatedCollections)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -67,15 +74,45 @@ const AddProductPage = () => {
     setIsLoading(true)
     setSuccessMessage('')
     try {
-      await axios.post(`${API_URL}/products/create`, {
-        title,
-        country_prod: countryProd,
-        category,
-        collections,
+      const token = localStorage.getItem('token')
+
+      // Создаем объект FormData для отправки данных и файлов
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('country_prod', countryProd)
+      formData.append('category', category)
+
+      // Добавляем коллекции и файлы в FormData
+      collections.forEach((collection, index) => {
+        formData.append(`collections[${index}][name]`, collection.name)
+        formData.append(
+          `collections[${index}][price]`,
+          collection.price.toString()
+        )
+        formData.append(
+          `collections[${index}][discount_price]`,
+          collection.discount_price.toString()
+        )
+
+        // Добавляем файлы в коллекцию
+        if (collection.photos) {
+          collection.photos.forEach((photo, photoIndex) => {
+            formData.append(`collections[${index}][photos]`, photo.filename) // file — это объект File
+          })
+        }
       })
+
+      // Отправляем запрос с FormData
+      await axios.post(`${API_URL}/products/create`, formData, {
+        headers: {
+          Authorization: token,
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+
       setSuccessMessage('Product added successfully')
 
-      // Reset form
+      // Сброс формы
       setTitle('')
       setCountryProd('')
       setCategory('')
@@ -84,7 +121,7 @@ const AddProductPage = () => {
           name: '',
           price: 0,
           discount_price: 0,
-          photos: [{ filename: '', path: '' }],
+          photos: [{ filename: '' }],
         },
       ])
     } catch (error) {
@@ -121,7 +158,7 @@ const AddProductPage = () => {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full border border-gray-300 text-black rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />
           </div>
@@ -137,7 +174,7 @@ const AddProductPage = () => {
               id="country_prod"
               value={countryProd}
               onChange={(e) => setCountryProd(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full border border-gray-300 text-black rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />
           </div>
@@ -154,7 +191,7 @@ const AddProductPage = () => {
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border border-gray-300 text-black rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required
           />
         </div>
@@ -183,7 +220,7 @@ const AddProductPage = () => {
                     onChange={(e) =>
                       handleCollectionChange(colIndex, 'name', e.target.value)
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 text-black rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     required
                   />
                 </div>
@@ -201,7 +238,7 @@ const AddProductPage = () => {
                     onChange={(e) =>
                       handleCollectionChange(colIndex, 'price', +e.target.value)
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 text-black rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     required
                   />
                 </div>
@@ -224,7 +261,7 @@ const AddProductPage = () => {
                       +e.target.value
                     )
                   }
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full border border-gray-300 text-black rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
               <div className="mt-4">
@@ -237,52 +274,38 @@ const AddProductPage = () => {
                           htmlFor={`photo_filename_${colIndex}_${photoIndex}`}
                           className="block text-sm font-medium text-gray-700"
                         >
-                          Имя файла
+                          Фотографии
                         </label>
                         <input
-                          type="text"
+                          type="file"
                           id={`photo_filename_${colIndex}_${photoIndex}`}
-                          value={photo.filename}
                           onChange={(e) =>
-                            handlePhotoChange(
-                              colIndex,
-                              photoIndex,
-                              'filename',
-                              e.target.value
-                            )
+                            handleFileChange(colIndex, photoIndex, e)
                           }
-                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          className="mt-1 block w-full border border-gray-300 text-black rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor={`photo_path_${colIndex}_${photoIndex}`}
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Путь
-                        </label>
-                        <input
-                          type="text"
-                          id={`photo_path_${colIndex}_${photoIndex}`}
-                          value={photo.path}
-                          onChange={(e) =>
-                            handlePhotoChange(
-                              colIndex,
-                              photoIndex,
-                              'path',
-                              e.target.value
-                            )
-                          }
-                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
+                        {photo.filename && (
+                          <div className="flex items-center mt-2">
+                            <span className="text-sm">{photo.filename}</span>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleRemovePhoto(colIndex, photoIndex)
+                              }
+                              className="ml-2 text-red-500 text-sm hover:text-red-700"
+                            >
+                              Удалить
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
                 ))}
                 <button
                   type="button"
-                  onClick={() => addPhoto(colIndex)}
-                  className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+                  onClick={() => handleAddPhoto(colIndex)}
+                  className="text-indigo-500 hover:text-indigo-700 mt-2"
                 >
                   Добавить фотографию
                 </button>
@@ -292,22 +315,18 @@ const AddProductPage = () => {
           <button
             type="button"
             onClick={addCollection}
-            className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+            className="text-indigo-500 hover:text-indigo-700"
           >
             Добавить коллекцию
           </button>
         </div>
-        <div>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={`w-full px-4 py-2 ${
-              isLoading ? 'bg-gray-400' : 'bg-indigo-500 hover:bg-indigo-600'
-            } text-white rounded-md transition-colors`}
-          >
-            {isLoading ? 'Сохранение...' : 'Сохранить продукт'}
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          disabled={isLoading}
+        >
+          {isLoading ? 'Добавление...' : 'Добавить продукт'}
+        </button>
       </form>
     </div>
   )
