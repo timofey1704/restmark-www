@@ -16,9 +16,15 @@ export const metadata: Metadata = {
     siteName: 'Restmark',
     images: [
       {
-        url: '', //найти фотку
+        url: 'https://i.ibb.co/gmqzzmb/header-logo-mod-1200x630.png',
         width: 1200,
         height: 630,
+        alt: 'Restmark Logo',
+      },
+      {
+        url: 'https://i.ibb.co/jhjh8vD/header-logo-mod.png',
+        width: 344,
+        height: 344,
         alt: 'Restmark Logo',
       },
     ],
@@ -29,7 +35,20 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Restmark',
     description: 'Продажа посуды, полное оснащение ресторанов, баров и кафе',
-    images: [''], //найти фотку
+    images: [
+      {
+        url: 'https://i.ibb.co/gmqzzmb/header-logo-mod-1200x630.png',
+        width: 1200,
+        height: 630,
+        alt: 'Restmark Logo',
+      },
+      {
+        url: 'https://i.ibb.co/jhjh8vD/header-logo-mod.png',
+        width: 344,
+        height: 344,
+        alt: 'Restmark Logo',
+      },
+    ],
   },
 }
 

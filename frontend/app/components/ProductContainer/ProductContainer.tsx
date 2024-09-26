@@ -7,7 +7,7 @@ const ProductContainer: React.FC<ProductDisplayProps> = ({
   img_url,
 }) => {
   return (
-    <div className="relative w-full h-64 mb-5 mr-5 bg-banners flex items-start justify-end">
+    <div className="relative w-full h-64 mb-5 mr-5 bg-banners flex items-start justify-end shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl">
       <div className="absolute">
         <Image
           src={img_url}
