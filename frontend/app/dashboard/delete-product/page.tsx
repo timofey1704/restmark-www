@@ -2,24 +2,37 @@
 
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import { FaTrash } from 'react-icons/fa'
+import DashboardNav from '@/app/components/dashboardNav/dashboardNav'
 
 const DeleteProductPage = () => {
   const [products, setProducts] = useState<any[]>([])
+  const router = useRouter()
   const API_URL = process.env.NEXT_PUBLIC_API_URL
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${API_URL}/products/get`)
+        const token = localStorage.getItem('token')
+        const response = await axios.get(`${API_URL}/products/get`, {
+          headers: {
+            Authorization: token,
+          },
+        })
         setProducts(response.data)
       } catch (error) {
         console.error('Error fetching products:', error)
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+          localStorage.removeItem('token')
+
+          router.push('/login')
+        }
       }
     }
 
     fetchProducts()
-  }, [])
+  }, [API_URL])
 
   const handleDelete = async (id: number) => {
     if (confirm('Вы уверены, что хотите удалить этот продукт?')) {
@@ -36,6 +49,7 @@ const DeleteProductPage = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <DashboardNav />
       <h1 className="text-3xl font-bold mb-4">Удалить продукт</h1>
       {products.length > 0 ? (
         <ul className="space-y-4">

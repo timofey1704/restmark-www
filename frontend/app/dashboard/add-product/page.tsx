@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import axios from 'axios'
+import DashboardNav from '@/app/components/dashboardNav/dashboardNav'
 
 const AddProductPage = () => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL
@@ -96,6 +97,7 @@ const AddProductPage = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-3xl">
+      <DashboardNav />
       <h1 className="text-4xl font-bold mb-8 text-center">Добавить продукт</h1>
       {successMessage && (
         <div

@@ -26,7 +26,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ category }) => {
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink
-            className="font-fivo-sans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white"
+            className="font-velasans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white"
             href="/"
           >
             Главная
@@ -35,10 +35,10 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ category }) => {
         <BreadcrumbSeparator />
         {category && (
           <>
-            <BreadcrumbItem className="font-fivo-sans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white">
+            <BreadcrumbItem className="font-velasans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white">
               <BreadcrumbLink
                 href={`/search/${category}`}
-                className="font-fivo-sans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white"
+                className="font-velasans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white"
               >
                 {displayName}
               </BreadcrumbLink>

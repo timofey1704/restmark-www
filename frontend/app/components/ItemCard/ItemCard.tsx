@@ -24,10 +24,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
         <ImageSlider images={imageUrls} />
         {!selectedCollection.photos.length && (
           <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-            <span className="text-white text-center font-fivo-sans text-opacity-70 text-sm sm:text-base md:text-xl">
+            <span className="text-white text-center font-velasans text-opacity-70 text-sm sm:text-base md:text-xl">
               Фотографии коллекции еще не загружены.
             </span>
-            <span className="text-white text-center font-fivo-sans text-opacity-70 text-sm sm:text-base md:text-xl">
+            <span className="text-white text-center font-velasans text-opacity-70 text-sm sm:text-base md:text-xl">
               Пожалуйста, <CallButton text="свяжитесь с нами" /> и мы вышлем
               фото Вам на почту.
             </span>
@@ -37,13 +37,13 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
       <div className="flex flex-col flex-grow md:ml-8 justify-between">
         <div>
-          <h2 className="text-3xl md:text-5xl font-unbounded-variable font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-unbounded font-bold mb-4">
             {brandName}
           </h2>
-          <p className="text-base font-thin font-fivo-sans my-3">
+          <p className="text-base font-thin font-velasans my-3">
             Выберите коллекцию или посмотрите каталог
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 text-base font-thin font-fivo-sans gap-2 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 text-base font-thin font-velasans gap-2 mb-4">
             {collections.map((collection) => (
               <label
                 key={collection.id}

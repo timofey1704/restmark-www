@@ -3,27 +3,40 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
-import { FaEdit, FaSave } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
+import { FaSave } from 'react-icons/fa'
 import { Product, Collection } from '@/app/types'
+import DashboardNav from '@/app/components/dashboardNav/dashboardNav'
 
 const EditProductPage = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const API_URL = process.env.NEXT_PUBLIC_API_URL
+  const router = useRouter()
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${API_URL}/products/get`)
+        const token = localStorage.getItem('token')
+        const response = await axios.get(`${API_URL}/products/get`, {
+          headers: {
+            Authorization: token,
+          },
+        })
         setProducts(response.data)
       } catch (error) {
         console.error('Error fetching products:', error)
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+          localStorage.removeItem('token')
+
+          router.push('/login')
+        }
       }
     }
 
     fetchProducts()
-  }, [])
+  }, [API_URL])
 
   const handleSelectProduct = (product: Product) => {
     setSelectedProduct(product)
@@ -85,7 +98,8 @@ const EditProductPage = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-white">
+      <DashboardNav />
       <h1 className="text-3xl font-bold mb-4">Изменить продукт</h1>
       {products.length > 0 ? (
         <ul className="space-y-4">
@@ -98,10 +112,9 @@ const EditProductPage = () => {
               onClick={() => handleSelectProduct(product)}
             >
               <div className="flex justify-between">
-                <div className="text-lg font-medium text-white">
+                <div className="text-lg font-medium text-black">
                   Продукт - {product.title}
                 </div>
-                <FaEdit />
               </div>
               {selectedProduct?.id === product.id && (
                 <div className="mt-4">
@@ -113,7 +126,7 @@ const EditProductPage = () => {
                       type="text"
                       value={selectedProduct.title}
                       onChange={(e) => handleInputChange(e, 'title')}
-                      className="mt-1 block w-full rounded-md border-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border-black text-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
 
@@ -132,7 +145,7 @@ const EditProductPage = () => {
                         onChange={(e) =>
                           handleCollectionChange(index, 'name', e.target.value)
                         }
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-black focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full rounded-md border-black shadow-sm text-black focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                       <label className="block text-sm font-medium text-gray-700">
                         Цена
@@ -147,7 +160,7 @@ const EditProductPage = () => {
                             Number(e.target.value)
                           )
                         }
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="mt-1 block w-full rounded-md border-black text-black shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                       {/* Фотографии */}
                       {collection.photos.map((photo) => (
