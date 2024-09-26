@@ -43,6 +43,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - restmark-api-app-uploads:/root/restmark/uploads
     #    ports:
     #      - 4000:4000
     networks:
