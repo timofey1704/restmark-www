@@ -9,6 +9,28 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Restmark',
   description: 'Best Horeca supply company in Belarus',
+  openGraph: {
+    title: 'Restmark',
+    description: 'Продажа посуды, полное оснащение ресторанов, баров и кафе',
+    url: 'https://restmark.by',
+    siteName: 'Restmark',
+    images: [
+      {
+        url: '', //найти фотку
+        width: 1200,
+        height: 630,
+        alt: 'Restmark Logo',
+      },
+    ],
+    locale: 'ru_RU',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Restmark',
+    description: 'Продажа посуды, полное оснащение ресторанов, баров и кафе',
+    images: [''], //найти фотку
+  },
 }
 
 export default function RootLayout({

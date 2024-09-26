@@ -10,8 +10,6 @@ const Customers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 'http://localhost:4000/api/customers'
-        // `${API_URL}/customers`
         const response = await axios.get(`${API_URL}/customers`)
         setCustomers(response.data)
       } catch (error) {

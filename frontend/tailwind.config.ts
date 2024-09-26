@@ -19,8 +19,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        'unbounded-variable': ['"Unbounded Variable"', 'sans-serif'],
-        'fivo-sans': ['"Fivo Sans"', 'sans-serif'],
+        unbounded: ['Unbounded', 'sans-serif'],
+        velasans: ['Vela Sans', 'sans-serif'],
       },
       colors: {
         banners: '#0C0C0C',

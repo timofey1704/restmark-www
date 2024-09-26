@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import HeaderPhoto from '../../../public/images/White (Horizontal).png'
+import HeaderLogo from '../../../public/images/header_logo.png'
 
 export default function Header() {
   return (
@@ -9,7 +9,7 @@ export default function Header() {
       <div className="text-white mb-4 sm:mb-0">
         <Link href="/">
           <Image
-            src={HeaderPhoto}
+            src={HeaderLogo}
             alt="header logo"
             className="w-64 sm:w-48 md:w-64 sm:ml-4 md:ml-20"
             priority

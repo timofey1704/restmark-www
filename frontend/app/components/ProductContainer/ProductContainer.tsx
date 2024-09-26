@@ -8,7 +8,7 @@ const ProductContainer: React.FC<ProductDisplayProps> = ({
 }) => {
   return (
     <div className="relative w-full h-64 mb-5 mr-5 bg-banners flex items-start justify-end">
-      <div className="absolute top-0 right-0">
+      <div className="absolute">
         <Image
           src={img_url}
           alt={title}
@@ -19,7 +19,7 @@ const ProductContainer: React.FC<ProductDisplayProps> = ({
         />
       </div>
 
-      <div className="absolute bottom-4 left-4 ml-3 mb-4 text-white font-unbounded-variable text-2xl sm:text-4xl md:text-3xl lg:text-4xl font-bold">
+      <div className="absolute bottom-4 left-4 ml-3 mb-4 text-white font-unbounded text-2xl sm:text-4xl md:text-3xl lg:text-4xl">
         {title}
       </div>
     </div>
