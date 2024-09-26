@@ -1,4 +1,7 @@
 const { Pool } = require('pg')
+const multer = require('multer')
+const path = require('path')
+
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -7,103 +10,131 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 })
 
+// загружаем изображения для хранения на сервере
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = path.join(__dirname, '../uploads/products')
+    cb(null, uploadPath)
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`)
+  },
+})
+
+const upload = multer({ storage })
+
 // создаем новый продукт
-exports.createProduct = async (req, res) => {
-  const { title, country_prod, category, collections } = req.body
-  const client = await pool.connect()
+exports.createProduct = [
+  upload.array('photos'), // Принимаем несколько изображений с ключом 'photos'
+  async (req, res) => {
+    const { title, country_prod, category, collections } = req.body
+    const client = await pool.connect()
 
-  try {
-    await client.query('BEGIN')
+    try {
+      await client.query('BEGIN')
 
-    const productResult = await client.query(
-      'INSERT INTO products (title, country_prod, category) VALUES ($1, $2, $3) RETURNING *',
-      [title, country_prod, category]
-    )
-    const product = productResult.rows[0]
-
-    for (const collection of collections) {
-      const { name, price, discount_price, photos } = collection
-
-      const collectionResult = await client.query(
-        'INSERT INTO collections (name, price, discount_price, product_id) VALUES ($1, $2, $3, $4) RETURNING *',
-        [name, price, discount_price, product.id]
+      // Вставляем новый продукт
+      const productResult = await client.query(
+        'INSERT INTO products (title, country_prod, category) VALUES ($1, $2, $3) RETURNING *',
+        [title, country_prod, category]
       )
-      const collectionData = collectionResult.rows[0]
+      const product = productResult.rows[0]
 
-      for (const photo of photos) {
-        const { filename, path } = photo
+      // Обрабатываем коллекции
+      for (const collection of collections) {
+        const { name, price, discount_price } = collection
 
-        await client.query(
-          'INSERT INTO photos (filename, path, collection_id) VALUES ($1, $2, $3)',
-          [filename, path, collectionData.id]
+        // Вставляем коллекцию, связанную с продуктом
+        const collectionResult = await client.query(
+          'INSERT INTO collections (name, price, discount_price, product_id) VALUES ($1, $2, $3, $4) RETURNING *',
+          [name, price, discount_price, product.id]
         )
+        const collectionData = collectionResult.rows[0]
+
+        // Если есть фотографии в запросе
+        const uploadedFiles = req.files // Файлы, загруженные через 'multer'
+
+        for (const file of uploadedFiles) {
+          await client.query(
+            'INSERT INTO photos (filename, path, collection_id) VALUES ($1, $2, $3)',
+            [file.filename, file.path, collectionData.id]
+          )
+        }
       }
-    }
 
-    await client.query('COMMIT')
-    res.status(201).json(product)
-  } catch (error) {
-    await client.query('ROLLBACK')
-    console.error('Error creating product:', error)
-    res.status(500).json({ message: 'Internal Server Error' })
-  } finally {
-    client.release()
-  }
-}
-// изменяем существующий продукт
-exports.updateProduct = async (req, res) => {
-  const { id } = req.params
-  const { title, country_prod, category, collections } = req.body
-  const client = await pool.connect()
-
-  try {
-    await client.query('BEGIN')
-
-    const productResult = await client.query(
-      'UPDATE products SET title = $1, country_prod = $2, category = $3 WHERE id = $4 RETURNING *',
-      [title, country_prod, category, id]
-    )
-
-    if (productResult.rows.length === 0) {
+      await client.query('COMMIT')
+      res.status(201).json(product)
+    } catch (error) {
       await client.query('ROLLBACK')
-      return res.status(404).json({ message: 'Product not found' })
+      console.error('Error creating product:', error)
+      res.status(500).json({ message: 'Internal Server Error' })
+    } finally {
+      client.release()
     }
+  },
+]
+// изменяем существующий продукт
+exports.updateProduct = [
+  upload.array('photos'), // Мидлвар для загрузки изображений
+  async (req, res) => {
+    const { id } = req.params
+    const { title, country_prod, category, collections } = req.body
+    const client = await pool.connect()
 
-    await client.query(
-      'DELETE FROM photos WHERE collection_id IN (SELECT id FROM collections WHERE product_id = $1)',
-      [id]
-    )
-    await client.query('DELETE FROM collections WHERE product_id = $1', [id])
+    try {
+      await client.query('BEGIN')
 
-    for (const collection of collections) {
-      const { name, price, discount_price, photos } = collection
-
-      const collectionResult = await client.query(
-        'INSERT INTO collections (name, price, discount_price, product_id) VALUES ($1, $2, $3, $4) RETURNING *',
-        [name, price, discount_price, id]
+      // Обновляем продукт
+      const productResult = await client.query(
+        'UPDATE products SET title = $1, country_prod = $2, category = $3 WHERE id = $4 RETURNING *',
+        [title, country_prod, category, id]
       )
-      const collectionData = collectionResult.rows[0]
 
-      for (const photo of photos) {
-        const { filename, path } = photo
-
-        await client.query(
-          'INSERT INTO photos (filename, path, collection_id) VALUES ($1, $2, $3)',
-          [filename, path, collectionData.id]
-        )
+      if (productResult.rows.length === 0) {
+        await client.query('ROLLBACK')
+        return res.status(404).json({ message: 'Product not found' })
       }
-    }
 
-    await client.query('COMMIT')
-    res.json(productResult.rows[0])
-  } catch (error) {
-    await client.query('ROLLBACK')
-    console.error('Error updating product:', error)
-    res.status(500).json({ message: 'Internal Server Error' })
-  } finally {
-    client.release()
-  }
-}
+      // Удаляем старые фотографии и коллекции
+      await client.query(
+        'DELETE FROM photos WHERE collection_id IN (SELECT id FROM collections WHERE product_id = $1)',
+        [id]
+      )
+      await client.query('DELETE FROM collections WHERE product_id = $1', [id])
+
+      // Обрабатываем новые коллекции и фотографии
+      for (const collection of collections) {
+        const { name, price, discount_price } = collection
+
+        // Вставляем новую коллекцию
+        const collectionResult = await client.query(
+          'INSERT INTO collections (name, price, discount_price, product_id) VALUES ($1, $2, $3, $4) RETURNING *',
+          [name, price, discount_price, id]
+        )
+        const collectionData = collectionResult.rows[0]
+
+        // Обрабатываем фотографии
+        const uploadedFiles = req.files // Файлы, загруженные через 'multer'
+
+        for (const file of uploadedFiles) {
+          await client.query(
+            'INSERT INTO photos (filename, path, collection_id) VALUES ($1, $2, $3)',
+            [file.filename, file.path, collectionData.id]
+          )
+        }
+      }
+
+      await client.query('COMMIT')
+      res.json(productResult.rows[0])
+    } catch (error) {
+      await client.query('ROLLBACK')
+      console.error('Error updating product:', error)
+      res.status(500).json({ message: 'Internal Server Error' })
+    } finally {
+      client.release()
+    }
+  },
+]
 
 // удаляем существующий продукт
 exports.deleteProduct = async (req, res) => {
