@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import axios from 'axios'
-import DashboardNav from '@/app/components/dashboardNav/dashboardNav'
+import DashboardNav from '../../components/dashboardNav/DashboardNav'
 
 const AddProductPage = () => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import DashboardNav from '../components/dashboardNav/dashboardNav'
+import DashboardNav from '../components/dashboardNav/DashboardNav'
 
 const Dashboard = () => {
   const router = useRouter()

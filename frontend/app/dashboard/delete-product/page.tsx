@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { FaTrash } from 'react-icons/fa'
-import DashboardNav from '@/app/components/dashboardNav/dashboardNav'
+import DashboardNav from '../../components/dashboardNav/DashboardNav'
 
 const DeleteProductPage = () => {
   const [products, setProducts] = useState<any[]>([])

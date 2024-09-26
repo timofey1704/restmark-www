@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FaSave } from 'react-icons/fa'
 import { Product, Collection } from '@/app/types'
-import DashboardNav from '@/app/components/dashboardNav/dashboardNav'
+import DashboardNav from '../../components/dashboardNav/DashboardNav'
 
 const EditProductPage = () => {
   const [products, setProducts] = useState<Product[]>([])
