@@ -15,7 +15,7 @@ const AddProductPage = () => {
       name: '',
       price: 0,
       discount_price: 0,
-      photos: [{ filename: '' }],
+      photos: [{ file: null as File | null }],
     },
   ])
   const [isLoading, setIsLoading] = useState(false)
@@ -40,20 +40,20 @@ const AddProductPage = () => {
     const file = event.target.files?.[0]
     if (file) {
       const updatedCollections = [...collections]
-      updatedCollections[colIndex].photos[photoIndex].filename = file.name // cохраняем имя файла
+      updatedCollections[colIndex].photos[photoIndex].file = file // сохраняем сам файл
       setCollections(updatedCollections)
     }
   }
 
   const handleRemovePhoto = (colIndex: number, photoIndex: number) => {
     const updatedCollections = [...collections]
-    updatedCollections[colIndex].photos[photoIndex].filename = '' // cбрасываем имя файла
+    updatedCollections[colIndex].photos[photoIndex].file = null
     setCollections(updatedCollections)
   }
 
   const handleAddPhoto = (colIndex: number) => {
     const updatedCollections = [...collections]
-    updatedCollections[colIndex].photos.push({ filename: '' })
+    updatedCollections[colIndex].photos.push({ file: null }) // Добавляем фото с file: null
     setCollections(updatedCollections)
   }
 
@@ -64,7 +64,7 @@ const AddProductPage = () => {
         name: '',
         price: 0,
         discount_price: 0,
-        photos: [{ filename: '' }],
+        photos: [{ file: null }],
       },
     ])
   }
@@ -97,7 +97,9 @@ const AddProductPage = () => {
         // Добавляем файлы в коллекцию
         if (collection.photos) {
           collection.photos.forEach((photo, photoIndex) => {
-            formData.append(`collections[${index}][photos]`, photo.filename) // file — это объект File
+            if (photo.file) {
+              formData.append(`collections[${index}][photos][]`, photo.file)
+            }
           })
         }
       })
@@ -121,7 +123,7 @@ const AddProductPage = () => {
           name: '',
           price: 0,
           discount_price: 0,
-          photos: [{ filename: '' }],
+          photos: [{ file: null }],
         },
       ])
     } catch (error) {
@@ -284,9 +286,9 @@ const AddProductPage = () => {
                           }
                           className="mt-1 block w-full border border-gray-300 text-black rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         />
-                        {photo.filename && (
+                        {photo.file?.name && (
                           <div className="flex items-center mt-2">
-                            <span className="text-sm">{photo.filename}</span>
+                            <span className="text-sm">{photo.file?.name}</span>
                             <button
                               type="button"
                               onClick={() =>

@@ -34,18 +34,20 @@ const upload = multer({ storage })
 // создаем новый продукт
 exports.createProduct = [
   upload.fields([
-    { name: 'photos[0]', maxCount: 10 },
-    { name: 'photos[1]', maxCount: 10 },
-    { name: 'photos[2]', maxCount: 10 },
-    { name: 'photos[3]', maxCount: 10 },
-    { name: 'photos[4]', maxCount: 10 },
-    { name: 'photos[5]', maxCount: 10 },
-    { name: 'photos[6]', maxCount: 10 },
-    { name: 'photos[7]', maxCount: 10 },
+    { name: 'collections[0][photos][]', maxCount: 10 },
+    { name: 'collections[1][photos][]', maxCount: 10 },
+    { name: 'collections[2][photos][]', maxCount: 10 },
+    { name: 'collections[3][photos][]', maxCount: 10 },
+    { name: 'collections[4][photos][]', maxCount: 10 },
+    { name: 'collections[5][photos][]', maxCount: 10 },
+    { name: 'collections[6][photos][]', maxCount: 10 },
+    { name: 'collections[7][photos][]', maxCount: 10 },
     // и т.д., если ожидаем больше коллекций
   ]), // принимаем несколько изображений с ключами 'photos[0]', 'photos[1]' и т.д.
   async (req, res) => {
     const { title, country_prod, category, collections } = req.body
+    console.log('Collections received:', collections) // логируем коллекции
+    console.log('Files received:', req.files)
     const client = await pool.connect()
 
     try {
@@ -63,21 +65,30 @@ exports.createProduct = [
         const collection = collections[i]
         const { name, price, discount_price } = collection
 
-        // вставляем коллекцию, связанную с продуктом
+        // вставляем коллекцию
         const collectionResult = await client.query(
           'INSERT INTO collections (name, price, discount_price, product_id) VALUES ($1, $2, $3, $4) RETURNING *',
           [name, price, discount_price, product.id]
         )
         const collectionData = collectionResult.rows[0]
 
-        //  если есть фотографии для данной коллекции
-        const collectionPhotos = req.files[`photos[${i}]`] // получаем файлы для конкретной коллекции
+        // доступ к файлам коллекции
+        const collectionPhotos = req.files[`collections[${i}][photos][]`]
 
         if (collectionPhotos) {
           for (const file of collectionPhotos) {
+            const imagePath = `/uploads/${file.filename}`
+
+            console.log(
+              'Saving photo for collection:',
+              collectionData.id,
+              file.filename,
+              imagePath
+            )
+
             await client.query(
-              'INSERT INTO photos (filename, path, collection_id) VALUES ($1, $2, $3)',
-              [file.filename, file.path, collectionData.id]
+              'INSERT INTO photos (collection_id, filename, path) VALUES ($1, $2, $3)',
+              [collectionData.id, file.filename, imagePath]
             )
           }
         }

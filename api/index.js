@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const path = require('path')
 
 const sendMessageRoute = require('./routes/sendMessage')
 const textRoute = require('./routes/texts')
@@ -33,6 +34,19 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 app.use(bodyParser.json())
+
+app.use(
+  '/uploads',
+  express.static(path.join(__dirname, '/root/restmark/uploads/'))
+)
+
+//! localdev
+// app.use(
+//   '/uploads',
+//   express.static(
+//     '/Users/timofey/Desktop/restmark-www/api/controllers/root/restmark/uploads'
+//   )
+// )
 
 app.use('/api/send-message', sendMessageRoute)
 app.use('/api/texts', textRoute)
