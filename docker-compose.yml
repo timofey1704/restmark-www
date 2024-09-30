@@ -11,8 +11,8 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_USER: ${DB_USER}
       BOT_TOKEN: ${BOT_TOKEN}
-      CHAT_ID: ${BOT_TOKEN}
-      JWT_SECRET: ${BOT_TOKEN}
+      CHAT_ID: ${CHAT_ID}
+      JWT_SECRET: ${JWT_SECRET}
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     env_file:
       - ./.env
@@ -35,8 +35,8 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_USER: ${DB_USER}
       BOT_TOKEN: ${BOT_TOKEN}
-      CHAT_ID: ${BOT_TOKEN}
-      JWT_SECRET: ${BOT_TOKEN}
+      CHAT_ID: ${CHAT_ID}
+      JWT_SECRET: ${JWT_SECRET}
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     env_file:
       - ./.env
