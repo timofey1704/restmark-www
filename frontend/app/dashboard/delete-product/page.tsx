@@ -32,7 +32,7 @@ const DeleteProductPage = () => {
     }
 
     fetchProducts()
-  }, [API_URL])
+  }, [API_URL, router])
 
   const handleDelete = async (id: number) => {
     if (confirm('Вы уверены, что хотите удалить этот продукт?')) {

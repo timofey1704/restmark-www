@@ -36,7 +36,7 @@ const EditProductPage = () => {
     }
 
     fetchProducts()
-  }, [API_URL])
+  }, [API_URL, router])
 
   const handleSelectProduct = (product: Product) => {
     setSelectedProduct(product)

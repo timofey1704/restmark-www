@@ -15,6 +15,11 @@ const bannersRouter = require('./routes/banners')
 
 const authenticateToken = require('./middlewares/authMiddleware')
 
+const {
+  limiter,
+  rateLimitExceededLogger,
+} = require('./controllers/rateLimiter')
+
 const app = express()
 const port = process.env.PORT || 4000
 
@@ -35,6 +40,18 @@ app.use(cors(corsOptions))
 
 app.use(bodyParser.json())
 
+app.use('/api/send-message', sendMessageRoute)
+app.use('/api/texts', textRoute)
+app.use('/api/products', authenticateToken, productsRoute)
+app.use('/api/sales', salesRoute)
+app.use('/api/login', loginRoute)
+app.use('/api/customers', customersRouter)
+app.use('/api/items', itemsRouter)
+app.use('/api/banners', bannersRouter)
+
+app.use(limiter)
+app.use(rateLimitExceededLogger)
+
 app.use(
   '/uploads',
   express.static(path.join(__dirname, '/root/restmark/uploads/'))
@@ -47,15 +64,6 @@ app.use(
 //     '/Users/timofey/Desktop/restmark-www/api/controllers/root/restmark/uploads'
 //   )
 // )
-
-app.use('/api/send-message', sendMessageRoute)
-app.use('/api/texts', textRoute)
-app.use('/api/products', authenticateToken, productsRoute)
-app.use('/api/sales', salesRoute)
-app.use('/api/login', loginRoute)
-app.use('/api/customers', customersRouter)
-app.use('/api/items', itemsRouter)
-app.use('/api/banners', bannersRouter)
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
