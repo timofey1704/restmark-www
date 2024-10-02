@@ -18,6 +18,11 @@ export interface Photo {
   id: number
   filename: string
   path: string
+  file?: File | null
+}
+
+export interface PhotoWithFile extends Photo {
+  file: File | null
 }
 
 export interface Collection {

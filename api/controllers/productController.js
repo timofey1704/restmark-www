@@ -108,7 +108,16 @@ exports.createProduct = [
 
 // изменяем существующий продукт
 exports.updateProduct = [
-  upload.array('photos'), // Мидлвар для загрузки изображений
+  upload.fields([
+    { name: 'collections[0][photos][]', maxCount: 10 },
+    { name: 'collections[1][photos][]', maxCount: 10 },
+    { name: 'collections[2][photos][]', maxCount: 10 },
+    { name: 'collections[3][photos][]', maxCount: 10 },
+    { name: 'collections[4][photos][]', maxCount: 10 },
+    { name: 'collections[5][photos][]', maxCount: 10 },
+    { name: 'collections[6][photos][]', maxCount: 10 },
+    { name: 'collections[7][photos][]', maxCount: 10 },
+  ]),
   async (req, res) => {
     const { id } = req.params
     const { title, country_prod, category, collections } = req.body
@@ -135,8 +144,9 @@ exports.updateProduct = [
       )
       await client.query('DELETE FROM collections WHERE product_id = $1', [id])
 
-      // Обрабатываем новые коллекции и фотографии
-      for (const collection of collections) {
+      // Обрабатываем новые коллекции
+      for (let i = 0; i < collections.length; i++) {
+        const collection = collections[i]
         const { name, price, discount_price } = collection
 
         // Вставляем новую коллекцию
@@ -146,14 +156,19 @@ exports.updateProduct = [
         )
         const collectionData = collectionResult.rows[0]
 
-        // Обрабатываем фотографии
-        const uploadedFiles = req.files // Файлы, загруженные через 'multer'
+        // Получаем фотографии для текущей коллекции
+        const collectionPhotos = req.files[`collections[${i}][photos][]`]
 
-        for (const file of uploadedFiles) {
-          await client.query(
-            'INSERT INTO photos (filename, path, collection_id) VALUES ($1, $2, $3)',
-            [file.filename, file.path, collectionData.id]
-          )
+        if (collectionPhotos) {
+          for (const file of collectionPhotos) {
+            const imagePath = `/uploads/${file.filename}`
+
+            // Сохраняем фотографии
+            await client.query(
+              'INSERT INTO photos (filename, path, collection_id) VALUES ($1, $2, $3)',
+              [file.filename, imagePath, collectionData.id]
+            )
+          }
         }
       }
 
