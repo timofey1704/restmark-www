@@ -84,6 +84,10 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
+        <meta
+          name="google-site-verification"
+          content="hq2PDzQpvdhkcbqPe2GEORgm1_V3cKzBfCFZP7nF2PM"
+        />
       </head>
       <body
         className={`${inter.className} bg-black text-white flex flex-col min-h-screen`}
