@@ -5,6 +5,8 @@ node_modules/
 .env
 .env*.local
 .env.production
+*.env
+.env.*
 
 # Debugging and logs
 npm-debug.log*
@@ -29,6 +31,9 @@ yarn.lock
 # Local configuration
 .vscode/
 .vercel/
+.idea/
+*.sublime-project
+*.sublime-workspace
 
 # TypeScript build info
 *.tsbuildinfo
@@ -36,7 +41,54 @@ next-env.d.ts
 
 # Misc
 .DS_Store
+Thumbs.db
 *.pem
 
-#database
+# Byte-compiled Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Виртуальные окружения
+venv/
+env/
+ENV/
+.venv
+bin/
+lib/
+local/
+.include/
+*.egg
+*.egg-info/
+.eggs/
+
+# Секретные ключи и конфигурации
+*.env
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Базы данных SQLite
+db.sqlite3
 database
+
+# Static and media files
+staticfiles/
+media/
+
+# Миграции (опционально)
+*/migrations/*.pyc
+*/migrations/*.py~
+
+# Компиляция файлов
+*.mo
+*.pot
+
+# Docker файлы
+*.pid
+*.dockerignore
+docker-compose.override.yml
+
+# Caddy файлы (если они сгенерированы локально)
+Caddyfile
