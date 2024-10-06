@@ -7,6 +7,7 @@ name = "pypi"
 django = "*"
 pycodestyle = "*"
 django-tastypie = "*"
+psycopg = "*"
 
 [dev-packages]
 
