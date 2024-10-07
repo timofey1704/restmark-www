@@ -55,7 +55,6 @@ env/
 ENV/
 .venv
 bin/
-lib/
 local/
 .include/
 *.egg

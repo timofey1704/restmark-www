@@ -1,32 +1,10 @@
-'use client'
 import React, { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
-import axios from 'axios'
 import { Customer } from '@/app/types'
+import { fetchCustomers } from '@/lib/fetchCustomers'
 
-const Customers = () => {
-  const [customers, setCustomers] = useState<Customer[]>([])
-  // const API_URL = process.env.NEXT_PUBLIC_API_URL
-  const API_URL = 'http://127.0.0.1:8000/api/v1'
-
-  const fetchCustomers = useMemo(() => {
-    return async () => {
-      try {
-        const response = await fetch(`${API_URL}/customers`)
-        if (!response.ok) {
-          throw new Error('Network response failed')
-        }
-        const data = await response.json()
-        setCustomers(data.objects || [])
-      } catch (error) {
-        console.error('Error fetching customers:', error)
-      }
-    }
-  }, [API_URL])
-
-  useEffect(() => {
-    fetchCustomers()
-  }, [fetchCustomers])
+const Customers = async () => {
+  const customers: Customer[] = await fetchCustomers()
 
   return (
     <div className="container mx-auto px-4 py-4">
