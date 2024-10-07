@@ -16,10 +16,10 @@ from django.http import JsonResponse
 #todo список эндпоинтов:
 # banners
 # customers
-# items?
+# items
 # login?
-# products
-# sales
+# products?
+# sales?
 # send-message
 # texts
 
