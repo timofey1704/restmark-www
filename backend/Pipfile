@@ -8,6 +8,7 @@ django = "*"
 pycodestyle = "*"
 django-tastypie = "*"
 psycopg = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
