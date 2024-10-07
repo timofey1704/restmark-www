@@ -9,6 +9,8 @@ pycodestyle = "*"
 django-tastypie = "*"
 psycopg = "*"
 django-cors-headers = "*"
+python-dotenv = "*"
+requests = "*"
 
 [dev-packages]
 

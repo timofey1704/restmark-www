@@ -77,7 +77,7 @@ class Collections (models.Model):
         verbose_name_plural = "Collections"
     
     def __str__(self):
-        return self.name
+        return f'{self.product_id.title} - {self.name}'
     
 #public.photos
 class Photos(models.Model):
@@ -89,3 +89,6 @@ class Photos(models.Model):
         db_table = 'photos'
         verbose_name = "Photo"
         verbose_name_plural = "Photos"
+    
+    # def __str__(self):
+    #   return f'{self.product_id.title} - {self.collection_id.name} - {self.filename}'

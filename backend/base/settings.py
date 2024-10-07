@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -106,18 +108,30 @@ CORS_ALLOW_ALL_ORIGINS = False  # запрет всех доменов, кром
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(dotenv_path=BASE_DIR / '.env')
+
+# проверяем подключение
+# print("DB_NAME:", os.environ.get("DB_NAME"))
+# print("DB_USER:", os.environ.get("DB_USER"))
+# print("DB_PASSWORD:", os.environ.get("DB_PASSWORD"))
+# print("DB_HOST:", os.environ.get("DB_HOST"))
+# print("DB_PORT:", os.environ.get("DB_PORT"))
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "restmarkDB",
-        "USER": "admin",
-        "PASSWORD": "qweasdZxCgit",
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
         "HOST": "localhost",
-        "PORT": "5432",
+        "PORT": os.environ.get("DB_PORT"),
     }
 }
 
+#TELEGRAM BOT
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -159,3 +173,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
