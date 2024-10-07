@@ -27,7 +27,7 @@ class Banners(models.Model):
 class Customers(models.Model):
     customer_name = models.CharField(max_length=255)
     img_url = models.CharField(max_length=255)
-    url = models.CharField(max_length=255, null=True, blank=True)
+    link = models.CharField(max_length=255, null=True, blank=True)
     
     class Meta:
         db_table = 'customers'
@@ -65,7 +65,7 @@ class Products(models.Model):
 
 #public.collections    
 class Collections (models.Model):
-    product_id = models.ForeignKey(Products, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Products, on_delete=models.CASCADE, db_column='product_id')
     name = models.CharField(max_length=255)
     price = models.CharField(max_length=255, null=True, blank=True)
     discount_price = models.CharField(max_length=255, null=True, blank=True)
@@ -81,7 +81,7 @@ class Collections (models.Model):
     
 #public.photos
 class Photos(models.Model):
-    collection_id = models.ForeignKey(Collections, on_delete=models.CASCADE)
+    collection_id = models.ForeignKey(Collections, on_delete=models.CASCADE, db_column='collection_id')
     filename =  models.CharField(max_length=255)
     path = models.CharField(max_length=255)
     
