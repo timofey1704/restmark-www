@@ -50,7 +50,7 @@ class Texts(models.Model):
 #public.products
 class Products(models.Model):
     title = models.CharField(max_length=255)
-    country_prod = models.CharField(max_length=255)
+    country_prod = models.CharField(max_length=255, null=True)
     sales_available = models.BooleanField(default=False)
     category = models.CharField(max_length=50, null=True, blank=True)
     pdf = models.CharField(max_length=255, null=True, blank=True)

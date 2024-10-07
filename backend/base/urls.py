@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.models import BannersResource, CustomersResource, TextsResource, TelegramMessageResource
+from api.models import BannersResource, CustomersResource, TextsResource, TelegramMessageResource, SearchResource
 from tastypie.api import Api
 
 #! подключаем эндпоинты
@@ -25,11 +25,15 @@ banners_resource = BannersResource() # api/v1/banners
 customers_resource = CustomersResource() # api/v1/customers
 texts_resource = TextsResource() # api/v1/texts
 send_message_resourse = TelegramMessageResource() #api/v1/send-message
+search_resource = SearchResource() #api/v1/items
+
+
 
 api.register(banners_resource)
 api.register(customers_resource)
 api.register(texts_resource)
 api.register(send_message_resourse)
+api.register(search_resource)
 
 
 urlpatterns = [
