@@ -1,30 +1,9 @@
 import React from 'react'
 import ItemCard from '../../components/ItemCard/ItemCard'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
-import { Product } from '../../types'
-
-// запрашиваем все продукты на сервере
-async function fetchProducts(): Promise<Product[]> {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL
-
-  try {
-    const res = await fetch(
-      `${API_URL}/items`,
-      { cache: 'no-store' }
-      // next: { revalidate: 3600 } -- если будет нужно кешировать, то заменить cache: no-store на эту строку
-    )
-    if (!res.ok) {
-      throw new Error('Failed to fetch data')
-    }
-    return res.json()
-  } catch (error) {
-    console.error('Error fetching data:', error)
-    return []
-  }
-}
+import { fetchProducts } from '@/lib/fetchProducts'
 
 const SearchPage = async ({ params }: { params: { category: string } }) => {
-  //получаем все продукты на сервере
   const products = await fetchProducts()
 
   //фильтруем по категории

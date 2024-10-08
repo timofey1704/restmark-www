@@ -1,3 +1,4 @@
+import os
 from django.db import models
 
 
@@ -38,13 +39,13 @@ class Customers(models.Model):
         return self.customer_name
 
 #public.texts
-class Texts(models.Model):
-    text = models.CharField(max_length=255)
+# class Texts(models.Model):
+#     text = models.CharField(max_length=255)
     
-    class Meta:
-        db_table = 'texts'
-        verbose_name = "Text"
-        verbose_name_plural = "Texts"
+#     class Meta:
+#         db_table = 'texts'
+#         verbose_name = "Text"
+#         verbose_name_plural = "Texts"
     
 
 #public.products
@@ -80,15 +81,28 @@ class Collections (models.Model):
         return f'{self.product_id.title} - {self.name}'
     
 #public.photos
+
+def upload_to(instance, filename):
+    # путь для сохранения фоток
+    return f'uploads/{filename}'
+
 class Photos(models.Model):
     collection_id = models.ForeignKey(Collections, on_delete=models.CASCADE, db_column='collection_id')
-    filename =  models.CharField(max_length=255)
-    path = models.CharField(max_length=255)
+    image = models.ImageField(upload_to=upload_to, null=True, blank=True)
+    filename = models.CharField(max_length=255, blank=True)
+    path = models.CharField(max_length=255, blank=True)
     
     class Meta:
         db_table = 'photos'
         verbose_name = "Photo"
         verbose_name_plural = "Photos"
+
+    def save(self, *args, **kwargs):
+        # генерация имени файла и пути
+        self.filename = os.path.basename(self.image.name)
+        # self.path = f'/root/restmark/uploads/{self.filename}'
+        self.path = f'/Users/timofey/Desktop/restmark-www/{self.filename}'
+        super().save(*args, **kwargs)
     
     # def __str__(self):
     #   return f'{self.product_id.title} - {self.collection_id.name} - {self.filename}'

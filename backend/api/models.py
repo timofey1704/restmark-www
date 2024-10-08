@@ -4,7 +4,7 @@ from tastypie.resources import Resource
 from tastypie.exceptions import ImmediateHttpResponse
 from tastypie.authorization import Authorization
 from .authentication import CustomAuthentication
-from shop.models import Banners, Customers, Texts, Products, Collections, Photos
+from shop.models import Banners, Customers, Products, Collections, Photos
 import requests
 from django.conf import settings
 from tastypie.http import HttpBadRequest, HttpApplicationError
@@ -35,11 +35,11 @@ class CustomersResource(ModelResource):
         resource_name = 'customers'
         allowed_methods = ['get']
         
-class TextsResource (ModelResource):
-    class Meta:
-        queryset = Texts.objects.all()
-        resource_name = 'texts'
-        allowed_methods = ['get']
+# class TextsResource (ModelResource):
+#     class Meta:
+#         queryset = Texts.objects.all()
+#         resource_name = 'texts'
+#         allowed_methods = ['get']
 
 class TelegramMessageResource(Resource):
     class Meta:

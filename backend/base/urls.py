@@ -16,14 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.models import BannersResource, CustomersResource, TextsResource, TelegramMessageResource, SearchResource
+from api.models import BannersResource, CustomersResource, TelegramMessageResource, SearchResource
 from tastypie.api import Api
+from django.conf import settings
+from django.conf.urls.static import static
 
 #! подключаем эндпоинты
 api = Api(api_name='v1')
 banners_resource = BannersResource() # api/v1/banners
 customers_resource = CustomersResource() # api/v1/customers
-texts_resource = TextsResource() # api/v1/texts
+# texts_resource = TextsResource() # api/v1/texts
 send_message_resourse = TelegramMessageResource() #api/v1/send-message
 search_resource = SearchResource() #api/v1/items
 
@@ -31,7 +33,7 @@ search_resource = SearchResource() #api/v1/items
 
 api.register(banners_resource)
 api.register(customers_resource)
-api.register(texts_resource)
+# api.register(texts_resource)
 api.register(send_message_resourse)
 api.register(search_resource)
 
@@ -39,4 +41,4 @@ api.register(search_resource)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api.urls))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

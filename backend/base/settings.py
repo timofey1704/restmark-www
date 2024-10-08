@@ -133,6 +133,13 @@ DATABASES = {
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 CHAT_ID = os.environ.get("CHAT_ID")
 
+#директория для фоток
+MEDIA_URL = '/media/'
+# MEDIA_ROOT = '/root/restmark/uploads/'
+MEDIA_ROOT = '/Users/timofey/Desktop/restmark-www/'
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 

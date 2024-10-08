@@ -9,4 +9,4 @@ admin.site.register(models.Photos)
 
 admin.site.register(models.Banners)
 admin.site.register(models.Customers)
-admin.site.register(models.Texts)
+# admin.site.register(models.Texts)
