@@ -19,6 +19,12 @@ const nextConfig = {
         pathname: '/uploads/**',
       },
       {
+        protocol: 'http', // для локал девеломпента
+        hostname: '127.0.0.1',
+        port: '8000',
+        pathname: '/media/uploads/**',
+      },
+      {
         protocol: 'https',
         hostname: 'restmark.by',
         pathname: '/uploads/**', // для мастера

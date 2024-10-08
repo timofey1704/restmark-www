@@ -1,5 +1,6 @@
 import os
 from django.db import models
+from django.conf import settings
 
 
 # Create your models here.
@@ -98,11 +99,13 @@ class Photos(models.Model):
         verbose_name_plural = "Photos"
 
     def save(self, *args, **kwargs):
-        # генерация имени файла и пути
-        self.filename = os.path.basename(self.image.name)
-        # self.path = f'/root/restmark/uploads/{self.filename}'
-        self.path = f'/Users/timofey/Desktop/restmark-www/{self.filename}'
-        super().save(*args, **kwargs)
-    
-    # def __str__(self):
-    #   return f'{self.product_id.title} - {self.collection_id.name} - {self.filename}'
+        super().save(*args, **kwargs)  #сохраняем изображение
+        
+        # генерируем путь к файлу если удалось его сохранить
+        if self.image:
+            self.filename = os.path.basename(self.image.name)
+            self.path = f'{settings.BASE_URL}{settings.MEDIA_URL}{self.image.name}'
+            super().save(*args, **kwargs)   # записываем путь и имя файла в базу
+        else:
+            self.filename = ''
+            self.path = ''
