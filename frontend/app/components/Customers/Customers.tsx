@@ -7,8 +7,8 @@ const Customers = async () => {
   const customers: Customer[] = await fetchCustomers()
 
   return (
-    <div className="container mx-auto px-4 py-4">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div className="w-full mx-auto px-4 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {customers.map((customer) => (
           <a
             key={customer.id}
@@ -23,7 +23,7 @@ const Customers = async () => {
                 alt={customer.customer_name}
                 height={1078}
                 width={565}
-                className="rounded-lg object-cover"
+                className="rounded-lg w-auto h-auto object-cover"
                 priority
               />
             </div>

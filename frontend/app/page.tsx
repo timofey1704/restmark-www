@@ -4,13 +4,13 @@ import Customers from './components/Customers/Customers'
 
 const Home = () => {
   return (
-    <main className="px-4 sm:px-6 lg:px-8">
-      <div className="font-unbounded text-3xl sm:text-4xl md:text-4xl lg:text-5xl mb-4">
+    <main className="w-3/4 mx-auto">
+      <div className="font-unbounded text-3xl font-semibold sm:text-4xl md:text-4xl lg:text-5xl mb-4 mt-7">
         <p>Комплексное оснащение</p>
         <p>ресторанов, баров и гостинниц</p>
       </div>
 
-      <div className="py-1 font-velasans font-thin text-gray-300 text-opacity-80 text-base lg:text-lg sm:text-sm">
+      <div className="py-2 font-velasans font-thin text-gray-300 mb-4 text-base lg:text-lg sm:text-sm">
         Мы помогаем реализовывать Ваши идеи
       </div>
       <Banners />
@@ -21,7 +21,7 @@ const Home = () => {
         <h2 className="font-unbounded text-3xl sm:text-4xl md:text-4xl lg:text-5xl mb-4">
           Наши клиенты
         </h2>
-        <p className="py-1 font-velasans font-thin text-gray-300 text-opacity-80 text-base lg:text-lg sm:text-sm">
+        <p className="py-1 font-velasans font-thin text-gray-300  text-base lg:text-lg sm:text-sm">
           Вы будете в хорошей компании
         </p>
       </div>
