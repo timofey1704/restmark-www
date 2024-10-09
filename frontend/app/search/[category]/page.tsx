@@ -12,9 +12,9 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
   )
 
   return (
-    <>
+    <div className="w-3/4 mx-auto">
       <Breadcrumbs category={params.category} />
-      <h1 className="font-unbounded text-4xl sm:text-5xl md:text-6xl mx-4 sm:mx-8 md:mx-16 lg:mx-24 mt-5 text-center sm:text-left">
+      <h1 className="font-unbounded text-4xl sm:text-5xl md:text-6xl mt-5 text-center sm:text-left">
         Бренды
       </h1>
 
@@ -39,7 +39,7 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
