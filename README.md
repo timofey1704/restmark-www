@@ -14,7 +14,7 @@
 
 ### Бэкенд
 
-- **Express.js** - веб-фреймворк для Node.js.
+- **Django.py** - веб-фреймворк для Python.
 - **PostgreSQL** - реляционная база данных для хранения данных.
 
 ## Установка
@@ -41,8 +41,8 @@
    cd frontend
    npm install
 
-   cd api
-   npm install
+   cd backend
+   pipenv install
    ```
 
 3. **Настройка базы данных:**
@@ -50,15 +50,16 @@
    Создайте базу данных PostgreSQL и выполните миграции:
 
    ```sh
-   createdb postgres
-   # Выполните миграции, если они имеются
-   # Например, если используется Sequelize:
-   npx sequelize-cli db:migrate
+   createdb restmarkDB
+   # Выполните миграции, если они имеются. В проекте откройте директорию backend
+   cd backend
+   python manage.py makemigrations
+   python manage.py migrate
    ```
 
 4. **Настройка переменных окружения:**
 
-   Создайте файл `.env` в директории `api` и добавьте необходимые переменные окружения:
+   Создайте файл `.env` в директории `backend` и добавьте необходимые переменные окружения:
 
    ```env
    # telegram data
@@ -67,7 +68,7 @@
 
    # database connection
 
-    DB_USER
+   DB_USER
    DB_HOST
    DB_NAME
    DB_PASSWORD
@@ -80,22 +81,22 @@
 
 ````
 
-5. **Запуск проекта:**
+5. **Локальная разработка:**
 
    Откройте два терминала или используйте вкладки в одном терминале.
 
    В первом терминале запустите бэкенд:
 
    ```sh
-   cd api
-   npm run dev
+   cd backend
+   python manage.py runserver
 ````
 
 Во втором терминале запустите фронтенд:
 
 ```sh
 cd frontend
-npm start
+npm run dev
 ```
 
 Теперь проект будет доступен по адресу `http://localhost:3000`.

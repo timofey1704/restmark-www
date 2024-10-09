@@ -1,29 +1,14 @@
-'use client'
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
 import { Customer } from '@/app/types'
+import { fetchCustomers } from '@/lib/fetchCustomers'
 
-const Customers = () => {
-  const [customers, setCustomers] = useState<Customer[]>([])
-  const API_URL = process.env.NEXT_PUBLIC_API_URL
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/customers`)
-        setCustomers(response.data)
-      } catch (error) {
-        console.error('Error fetching customers', error)
-      }
-    }
-    if (API_URL) {
-      fetchData()
-    }
-  }, [API_URL])
+const Customers = async () => {
+  const customers: Customer[] = await fetchCustomers()
 
   return (
-    <div className="container mx-auto px-4 py-4">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div className="w-full mx-auto px-4 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {customers.map((customer) => (
           <a
             key={customer.id}
@@ -38,7 +23,7 @@ const Customers = () => {
                 alt={customer.customer_name}
                 height={1078}
                 width={565}
-                className="rounded-lg object-cover"
+                className="rounded-lg w-auto h-auto object-cover"
                 priority
               />
             </div>

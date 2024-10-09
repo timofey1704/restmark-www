@@ -19,7 +19,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
     : [defaultImageUrl]
 
   return (
-    <div className="bg-banners text-white py-4 px-4 rounded-2xl shadow-md flex flex-col md:flex-row">
+    <div className="bg-banners text-white py-4 rounded-2xl shadow-md flex flex-col md:flex-row">
       <div className="relative w-full md:w-3/5 h-64 md:h-auto rounded-md overflow-hidden mb-4 md:mb-0">
         <ImageSlider images={imageUrls} />
         {!selectedCollection.photos.length && (

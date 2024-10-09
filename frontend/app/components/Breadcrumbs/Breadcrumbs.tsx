@@ -22,7 +22,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ category }) => {
     ? categoryDisplayNames[category] || category
     : null
   return (
-    <Breadcrumb className="ml-4 sm:ml-8 sm:text-xs md:ml-16 lg:ml-24">
+    <Breadcrumb className=" sm:text-xs ">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink

@@ -13,10 +13,22 @@ const nextConfig = {
         pathname: '/**',
       },
       {
+        protocol: 'https',
+        hostname: 'ibb.co',
+        port: '',
+        pathname: '/**',
+      },
+      {
         protocol: 'http', // для локал девеломпента
         hostname: 'localhost',
         port: '4000',
         pathname: '/uploads/**',
+      },
+      {
+        protocol: 'http', // для локал девеломпента
+        hostname: '127.0.0.1',
+        port: '8000',
+        pathname: '/media/uploads/**',
       },
       {
         protocol: 'https',
