@@ -19,24 +19,22 @@ const SearchPage = async ({ params }: { params: { category: string } }) => {
       </h1>
 
       <div className="min-h-screen bg-black text-white py-10">
-        <div className="container px-4">
-          <div className="grid grid-cols-1">
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product) => (
-                <ItemCard
-                  key={product.id}
-                  brandName={product.title}
-                  collections={product.collections}
-                  catalog_url={`${product.pdf}`}
-                />
-              ))
-            ) : (
-              <div className="text-center font-velasans text-2xl text-white">
-                К сожалению, нам пока нечего вам предложить. Следите за
-                объявлениями!
-              </div>
-            )}
-          </div>
+        <div className="grid grid-cols-1">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <ItemCard
+                key={product.id}
+                brandName={product.title}
+                collections={product.collections}
+                catalog_url={`${product.pdf}`}
+              />
+            ))
+          ) : (
+            <div className="text-center font-velasans text-2xl text-white">
+              К сожалению, нам пока нечего вам предложить. Следите за
+              объявлениями!
+            </div>
+          )}
         </div>
       </div>
     </div>
