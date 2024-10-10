@@ -3,9 +3,9 @@ restmark.by {
 }
 
 restmark.by/api/* {
-    reverse_proxy restmark-api-app:4000
+    reverse_proxy restmark-api-app:8000
 }
 
 restmark.by/api {
-    reverse_proxy restmark-api-app:4000
+    reverse_proxy restmark-api-app:8000
 }
