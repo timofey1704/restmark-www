@@ -13,22 +13,23 @@ interface ImageSliderProps {
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
   const settings = {
     dots: false,
-    infinite: images.length > 1, // иначе могут возникнуть дубли defaultPhoto
+    infinite: images.length > 1,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    adaptiveHeight: true,
   }
 
   return (
     <Slider {...settings}>
       {images.map((img, index) => (
-        <div key={index}>
+        <div key={index} className="relative w-full pb-[56.25%]">
           <Image
             src={img}
             alt={`Slide ${index}`}
-            height={1078}
-            width={565}
-            className="w-full h-full"
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={index === 0}
           />
         </div>
