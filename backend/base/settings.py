@@ -18,18 +18,18 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # урл для локалдевеломпента
-BASE_URL = 'http://127.0.0.1:8000'
-# BASE_URL = 'https://restmark.by'
+# BASE_URL = 'http://127.0.0.1:8000'
+BASE_URL = 'https://restmark.by'
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1#6wqu@+78oqip*b%t=)5--brj$@@=&39m!7($r6m&t#utzr0g'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost:3000', 'restmark.by', '127.0.0.1']
 
@@ -128,7 +128,7 @@ DATABASES = {
         "NAME": os.environ.get("DB_NAME"),
         "USER": os.environ.get("DB_USER"),
         "PASSWORD": os.environ.get("DB_PASSWORD"),
-        "HOST": "localhost",
+        "HOST": os.environ.get("DB_HOST"),
         "PORT": os.environ.get("DB_PORT"),
     }
 }
@@ -139,8 +139,8 @@ CHAT_ID = os.environ.get("CHAT_ID")
 
 #директория для фоток
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = '/root/restmark/uploads/'
-MEDIA_ROOT = '/Users/timofey/Desktop/restmark-www/'
+MEDIA_ROOT = '/root/restmark/uploads/'
+# MEDIA_ROOT = '/Users/timofey/Desktop/restmark-www/'
 
 
 
