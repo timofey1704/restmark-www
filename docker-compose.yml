@@ -12,8 +12,9 @@ services:
       DB_USER: ${DB_USER}
       BOT_TOKEN: ${BOT_TOKEN}
       CHAT_ID: ${CHAT_ID}
-      JWT_SECRET: ${JWT_SECRET}
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+      API_URL: ${API_URL}
+      SECRET_KEY: ${SECRET_KEY}
     env_file:
       - ./.env
     depends_on:
@@ -25,7 +26,7 @@ services:
       - restmark
   restmark-api-app:
     build:
-      context: api/.
+      context: backend/.
     #    image: restmark-api
     container_name: restmark-api-app
     environment:
@@ -36,8 +37,9 @@ services:
       DB_USER: ${DB_USER}
       BOT_TOKEN: ${BOT_TOKEN}
       CHAT_ID: ${CHAT_ID}
-      JWT_SECRET: ${JWT_SECRET}
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+      API_URL: ${API_URL}
+      SECRET_KEY: ${SECRET_KEY}
     env_file:
       - ./.env
     depends_on:
