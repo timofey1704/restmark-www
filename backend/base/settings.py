@@ -26,12 +26,12 @@ BASE_URL = 'https://restmark.by'
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = "'django-insecure-1#6wqu@+78oqip*b%t=)5--brj$@@=&39m!7($r6m&t#utzr0g'"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost:3000', 'restmark.by', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost:3000', 'restmark.by', 'www.restmark.by' '127.0.0.1', 'restmark-api-app']
 
 
 # Application definition
@@ -65,6 +65,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'base.urls'
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://restmark.by',
+    'http://restmark.by',
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -82,6 +87,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'base.wsgi.application'
+
+
 
 CORS_ALLOW_CREDENTIALS = True  # для разрешения cookie
 

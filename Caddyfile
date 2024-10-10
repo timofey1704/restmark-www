@@ -9,3 +9,11 @@ restmark.by/api/* {
 restmark.by/api {
     reverse_proxy restmark-api-app:8000
 }
+
+restmark.by/admin {
+    reverse_proxy restmark-api-app:8000
+}
+
+restmark.by/admin/* {
+    reverse_proxy restmark-api-app:8000
+}
