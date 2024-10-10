@@ -20,12 +20,6 @@ const nextConfig = {
       },
       {
         protocol: 'http', // для локал девеломпента
-        hostname: 'localhost',
-        port: '4000',
-        pathname: '/uploads/**',
-      },
-      {
-        protocol: 'http', // для локал девеломпента
         hostname: '127.0.0.1',
         port: '8000',
         pathname: '/media/uploads/**',

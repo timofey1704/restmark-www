@@ -37,13 +37,13 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
       <div className="flex flex-col flex-grow md:ml-8 justify-between">
         <div>
-          <h2 className="text-3xl md:text-5xl font-unbounded font-bold mb-4">
+          <h2 className="text-3xl  md:text-5xl font-unbounded font-bold mb-4 pl-1 sm:pl-2">
             {brandName}
           </h2>
-          <p className="text-base font-thin font-velasans my-3">
+          <p className="text-base font-thin font-velasans my-3 pl-1 sm:pl-2">
             Выберите коллекцию или посмотрите каталог
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 text-base font-thin font-velasans gap-2 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 text-base font-thin font-velasans gap-2 mb-4 pl-1 sm:pl-2">
             {collections.map((collection) => (
               <label
                 key={collection.id}
