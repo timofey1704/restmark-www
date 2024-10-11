@@ -22,7 +22,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
     <div className="bg-banners text-white py-4 rounded-2xl shadow-md flex flex-col md:flex-row">
       <div className="relative w-full md:w-3/5 aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden mb-4 md:mb-0">
         <ImageSlider images={imageUrls} />
-        {!selectedCollection.photos.length && (
+        {(!selectedCollection || !selectedCollection.photos || selectedCollection.photos.length === 0) && (
           <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
             <span className="text-white text-center font-velasans text-opacity-70 text-sm sm:text-base md:text-xl">
               Фотографии коллекции еще не загружены.

@@ -81,6 +81,9 @@ class Collections (models.Model):
     def __str__(self):
         return f'{self.product_id.title} - {self.name}'
     
+    def get_photos(self):
+        return self.photos.all() if self.photos.exists() else []
+
 #public.photos
 
 def upload_to(instance, filename):
