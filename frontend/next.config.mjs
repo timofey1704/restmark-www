@@ -27,7 +27,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'restmark.by',
-        pathname: '/uploads/**', // для мастера
+        pathname: '/media/uploads/**', // для мастера
       },
     ],
   },
