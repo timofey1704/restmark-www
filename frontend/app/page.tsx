@@ -7,7 +7,7 @@ const Home = () => {
     <main className="w-3/4 mx-auto">
       <div className="font-unbounded text-3xl font-semibold sm:text-4xl md:text-4xl lg:text-5xl mb-4 mt-7">
         <p>Комплексное оснащение</p>
-        <p>ресторанов, баров и гостинниц</p>
+        <p>ресторанов, баров и гостиниц</p>
       </div>
 
       <div className="py-2 font-velasans font-thin text-gray-300 mb-4 text-base lg:text-lg sm:text-sm">

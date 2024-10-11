@@ -4,7 +4,7 @@ export const fetchCustomers = async () => {
 
   const response = await fetch(`${API_URL}/customers`)
   if (!response.ok) {
-    throw new Error('Failed to fetch banners')
+    throw new Error('Failed to fetch customers')
   }
 
   const data = await response.json()

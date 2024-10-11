@@ -2,7 +2,7 @@ import React from 'react'
 
 const AboutUsPage = () => {
   return (
-    <div className="max-w-4xl mx-auto py-12 px-6">
+    <div className="w-3/4 mx-auto py-12 px-6 text-justify">
       <h1 className="text-4xl font-bold mb-8">О Нас</h1>
       <p className="mb-6">
         Наша компания — ваш надежный партнер в мире профессионального оснащения
