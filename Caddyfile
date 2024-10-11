@@ -17,3 +17,7 @@ restmark.by/admin {
 restmark.by/admin/* {
     reverse_proxy restmark-api-app:8000
 }
+
+restmark.by/static/* {
+    reverse_proxy restmark-api-app:8000
+}
