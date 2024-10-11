@@ -14,7 +14,7 @@ const ProductContainer: React.FC<ProductDisplayProps> = ({
           alt={title}
           height={1078}
           width={565}
-          className="w-full h-64 object-cover"
+          className="w-auto h-64 object-cover"
           priority
         />
       </div>

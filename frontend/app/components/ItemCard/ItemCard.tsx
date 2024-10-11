@@ -22,7 +22,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
   return (
     <div className="bg-banners text-white py-4 rounded-2xl shadow-md flex flex-col md:flex-row">
-      <div className="relative w-full md:w-3/5 aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden mb-4 md:mb-0">
+      <div className="relative w-full md:w-3/5 aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden mb-4 md:mb-0 flex-none">
         <ImageSlider images={imageUrls} />
 
         {/* Проверка на наличие selectedCollection и его фотографий */}
@@ -43,7 +43,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
       <div className="flex flex-col flex-grow md:ml-8 justify-between">
         <div>
-          <h2 className="text-3xl  md:text-5xl font-unbounded font-bold mb-4 pl-1 sm:pl-2">
+          <h2 className="text-3xl md:text-5xl font-unbounded font-bold mb-4 pl-1 sm:pl-2">
             {brandName}
           </h2>
           <p className="text-base font-thin font-velasans my-3 pl-1 sm:pl-2">
