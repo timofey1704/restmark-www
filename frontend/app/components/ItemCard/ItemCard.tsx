@@ -79,7 +79,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
             </a>
           ) : (
             <span className="border py-2 px-4 rounded-md text-gray-500 w-full sm:w-auto">
-              Коллекция недоступна
+              Посмотреть коллекцию
             </span>
           )}
           <a
