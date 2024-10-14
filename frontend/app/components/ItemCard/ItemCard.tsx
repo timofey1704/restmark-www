@@ -7,6 +7,7 @@ import CallButton from '../LeadPopup/CallButton'
 const ItemCard: React.FC<ItemCardProps> = ({
   brandName,
   collections,
+  collection_url,
   catalog_url,
 }) => {
   const [selectedCollection, setSelectedCollection] = useState<Collection>(
@@ -69,9 +70,18 @@ const ItemCard: React.FC<ItemCardProps> = ({
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4">
-          <button className="border py-2 px-4 rounded-md hover:bg-gray-700 w-full sm:w-auto">
-            Посмотреть коллекцию
-          </button>
+          {selectedCollection && selectedCollection.collection_url ? (
+            <a
+              href={selectedCollection.collection_url}
+              className="border py-2 px-4 rounded-md hover:bg-gray-700 w-full sm:w-auto"
+            >
+              Посмотреть коллекцию
+            </a>
+          ) : (
+            <span className="border py-2 px-4 rounded-md text-gray-500 w-full sm:w-auto">
+              Коллекция недоступна
+            </span>
+          )}
           <a
             href={catalog_url}
             className="border py-2 px-4 rounded-md hover:bg-gray-700 flex justify-center items-center w-full sm:w-auto"

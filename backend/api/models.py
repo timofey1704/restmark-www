@@ -142,17 +142,18 @@ class SearchResource(Resource):
                         'price': row[7],
                         'discount_price': row[8],
                         'discount_percent': row[9],
+                        'collection_url': row[10],
                         'photos': []
                     }
                     collections.append(collection)
 
                 # обрабатываем фотографии
-                photo_id = row[10]
+                photo_id = row[11]
                 if photo_id:
                     collection['photos'].append({
                         'id': photo_id,
-                        'filename': row[11],
-                        'path': row[12]
+                        'filename': row[12],
+                        'path': row[13]
                     })
 
         # преобразуем результат в список

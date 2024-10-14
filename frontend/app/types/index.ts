@@ -32,6 +32,7 @@ export interface Collection {
   discount_price: number
   discount_percent: number
   photos: Photo[]
+  collection_url: string
 }
 
 export interface Product {
@@ -41,12 +42,14 @@ export interface Product {
   category: string
   collections: Collection[]
   pdf: string
+  collection_url?: string
 }
 
 export interface ItemCardProps {
   brandName: string
   collections: Collection[]
   catalog_url: string
+  collection_url?: string
 }
 
 export interface ImageSliderProps {

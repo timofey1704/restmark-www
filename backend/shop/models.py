@@ -72,6 +72,7 @@ class Collections (models.Model):
     price = models.CharField(max_length=255, null=True, blank=True)
     discount_price = models.CharField(max_length=255, null=True, blank=True)
     discount_percent = models.CharField(max_length=255, null=True, blank=True)
+    collection_url = models.CharField(max_length=255, null=True, blank=True, db_column='collection_url')
     
     class Meta:
         db_table = 'collections'
