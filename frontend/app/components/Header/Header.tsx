@@ -22,7 +22,7 @@ export default function Header() {
           className="hover:underline font-velasans text-lg sm:text-lg md:text-lg lg:text-lg 2xl:text-xl text-center sm:text-right"
         >
           +375 (44) 790-93-81
-          <div className="text-red-400 font-velasans text-xl sm:text-xl md:text-xl lg:text-xl 2xl:text-2xl cursor-pointer">
+          <div className="font-velasans text-lg sm:text-lg md:text-lg lg:text-lg 2xl:text-2xl cursor-pointer">
             Позвонить нам
           </div>
         </a>

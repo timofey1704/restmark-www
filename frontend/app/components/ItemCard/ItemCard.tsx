@@ -43,7 +43,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
       <div className="flex flex-col flex-grow md:ml-8 justify-between">
         <div>
-          <h2 className="text-3xl md:text-5xl font-unbounded font-bold mb-4 pl-1 sm:pl-2">
+          <h2 className="text-3xl md:text-4xl 2xl:text-5xl font-unbounded font-bold mb-4 pl-1 sm:pl-2">
             {brandName}
           </h2>
           <p className="text-base font-thin font-velasans my-3 pl-1 sm:pl-2">

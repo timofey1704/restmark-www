@@ -23,7 +23,8 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
   return (
     <Slider {...settings}>
       {images.map((img, index) => (
-        <div key={index} className="relative w-full pb-[56.25%]">
+        <div key={index} className="relative w-full pb-[75%]">
+          {/*4:3 соотношение сторон*/}
           <Image
             src={img}
             alt={`Slide ${index}`}
