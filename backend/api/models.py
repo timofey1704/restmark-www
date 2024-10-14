@@ -95,6 +95,7 @@ class SearchResource(Resource):
           c.price,
           c.discount_price,
           c.discount_percent,
+          c.collection_url,
           ph.id AS photo_id,
           ph.filename,
           ph.path
