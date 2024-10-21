@@ -3,16 +3,14 @@ from tastypie.resources import ModelResource
 from tastypie.resources import Resource
 from tastypie.exceptions import ImmediateHttpResponse
 from tastypie.authorization import Authorization
-from .authentication import CustomAuthentication
-from shop.models import Banners, Customers, Products, Collections, Photos
+from shop.models import Banners, Customers
 import requests
 from django.conf import settings
-from tastypie.http import HttpBadRequest, HttpApplicationError
+from tastypie.http import HttpBadRequest, HttpApplicationError, HttpCreated
 from tastypie import fields
 from django.db import connection
 from django.http import JsonResponse
 
-# Create your models here.
 #todo список эндпоинтов:
 # banners
 # customers
@@ -35,17 +33,10 @@ class CustomersResource(ModelResource):
         resource_name = 'customers'
         allowed_methods = ['get']
         
-# class TextsResource (ModelResource):
-#     class Meta:
-#         queryset = Texts.objects.all()
-#         resource_name = 'texts'
-#         allowed_methods = ['get']
-
 class TelegramMessageResource(Resource):
     class Meta:
         resource_name = 'send-message'
         allowed_methods = ['post']
-        authentication = CustomAuthentication()
         authorization = Authorization()
 
     def obj_create(self, bundle, **kwargs):
@@ -64,8 +55,11 @@ class TelegramMessageResource(Resource):
                     'text': message,
                 }
             )
+            
             response.raise_for_status()
-            return self.create_response(bundle.request, {'success': 'Message sent successfully'})
+            bundle.data['success'] = 'Message sent successfully'
+            raise ImmediateHttpResponse(self.create_response(bundle.request, bundle, response_class=HttpCreated))
+           
         except requests.RequestException as e:
             raise ImmediateHttpResponse(
                 self.create_response(
