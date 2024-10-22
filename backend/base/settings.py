@@ -31,7 +31,7 @@ SECRET_KEY = "'django-insecure-1#6wqu@+78oqip*b%t=)5--brj$@@=&39m!7($r6m&t#utzr0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost:3000', 'restmark.by', 'www.restmark.by', '127.0.0.1', 'restmark-api-app']
+ALLOWED_HOSTS = ['localhost:3000', 'restmark.by', 'www.restmark.by', '127.0.0.1', 'restmark-api-app', 'exp://192.168.0.20:8081', 'http://localhost:8081']
 
 
 # Application definition
