@@ -1,7 +1,3 @@
-export type TitleProps = {
-  titles: TitleItem[]
-}
-
 export type TitleItem = {
   id?: number
   title: string
@@ -19,10 +15,6 @@ export interface Photo {
   filename: string
   path: string
   file?: File | null
-}
-
-export interface PhotoWithFile extends Photo {
-  file: File | null
 }
 
 export interface Collection {
@@ -50,10 +42,6 @@ export interface ItemCardProps {
   collections: Collection[]
   catalog_url: string
   collection_url?: string
-}
-
-export interface ImageSliderProps {
-  images: string[]
 }
 
 export interface Lead {
