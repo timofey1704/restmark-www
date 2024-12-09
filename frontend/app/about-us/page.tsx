@@ -1,4 +1,49 @@
 import React from 'react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About Us - Restmark',
+  description:
+    'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
+  openGraph: {
+    title: 'About Us - Restmark',
+    description:
+      'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
+    url: 'https://restmark.by/about-us',
+    siteName: 'Restmark',
+    images: [
+      {
+        url: 'https://i.ibb.co/gmqzzmb/header-logo-mod-1200x630.png',
+        width: 1200,
+        height: 630,
+        alt: 'Restmark Logo',
+      },
+    ],
+    locale: 'ru_RU',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Us - Restmark',
+    description:
+      'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
+    images: [
+      {
+        url: 'https://i.ibb.co/gmqzzmb/header-logo-mod-1200x630.png',
+        width: 1200,
+        height: 630,
+        alt: 'Restmark Logo',
+      },
+    ],
+  },
+  alternates: {
+    canonical: 'https://restmark.by/about-us',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
 
 const AboutUsPage = () => {
   return (

@@ -1,5 +1,3 @@
-'use client'
-
 import dynamic from 'next/dynamic'
 import React from 'react'
 
@@ -10,6 +8,50 @@ const MapComponent = dynamic(
     ssr: false, // отключаем серверный рендеринг для компонента
   }
 )
+
+export const metadata = {
+  title: 'Contact Us - Restmark',
+  description:
+    'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
+  openGraph: {
+    title: 'Contact Us - Restmark',
+    description:
+      'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
+    url: 'https://restmark.by/contact-us',
+    siteName: 'Restmark',
+    images: [
+      {
+        url: 'https://i.ibb.co/gmqzzmb/header-logo-mod-1200x630.png',
+        width: 1200,
+        height: 630,
+        alt: 'Restmark Logo',
+      },
+    ],
+    locale: 'ru_RU',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact Us - Restmark',
+    description:
+      'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
+    images: [
+      {
+        url: 'https://i.ibb.co/gmqzzmb/header-logo-mod-1200x630.png',
+        width: 1200,
+        height: 630,
+        alt: 'Restmark Logo',
+      },
+    ],
+  },
+  alternates: {
+    canonical: 'https://restmark.by/contact-us',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
 
 export default function ContactUsPage() {
   return (
