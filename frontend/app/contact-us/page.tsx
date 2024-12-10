@@ -10,11 +10,11 @@ const MapComponent = dynamic(
 )
 
 export const metadata = {
-  title: 'Contact Us - Restmark',
+  title: 'Связаться с нами - Restmark',
   description:
     'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
   openGraph: {
-    title: 'Contact Us - Restmark',
+    title: 'Связаться с нами - Restmark',
     description:
       'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
     url: 'https://restmark.by/contact-us',
@@ -32,7 +32,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contact Us - Restmark',
+    title: 'Связаться с нами - Restmark',
     description:
       'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
     images: [

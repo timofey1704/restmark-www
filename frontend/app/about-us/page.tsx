@@ -2,11 +2,11 @@ import React from 'react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us - Restmark',
+  title: 'О нас - Restmark',
   description:
     'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
   openGraph: {
-    title: 'About Us - Restmark',
+    title: 'О нас - Restmark',
     description:
       'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
     url: 'https://restmark.by/about-us',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About Us - Restmark',
+    title: 'О нас - Restmark',
     description:
       'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
     images: [
