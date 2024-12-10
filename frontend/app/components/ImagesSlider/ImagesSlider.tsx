@@ -5,10 +5,7 @@ import Slider from 'react-slick'
 import Image from 'next/image'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-
-interface ImageSliderProps {
-  images: string[]
-}
+import { ImageSliderProps } from '@/app/types'
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
   const settings = {

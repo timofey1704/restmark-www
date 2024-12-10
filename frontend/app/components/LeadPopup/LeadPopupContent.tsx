@@ -7,10 +7,7 @@ import { AppDispatch } from '../../redux/store'
 import { toast } from 'react-hot-toast'
 import { sendLead } from '../../redux/slices/leadSlice'
 import { showSuccess, showError } from '../../redux/slices/notificationSlice'
-
-interface LeadPopupContentProps {
-  onClose: () => void
-}
+import { LeadPopupContentProps } from '@/app/types'
 
 const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL

@@ -1,11 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
-import { Customer } from '@/app/types'
-import { fetchCustomers } from '@/lib/fetchCustomers'
+import { CustomersProps } from '@/app/types'
 
-const Customers = async () => {
-  const customers: Customer[] = await fetchCustomers()
-
+const Customers = ({ customers }: CustomersProps) => {
   return (
     <div className="w-full mx-auto px-4 py-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

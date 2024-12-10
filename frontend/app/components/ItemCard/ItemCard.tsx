@@ -16,7 +16,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
   const defaultImageUrl = 'https://i.ibb.co/jyNWgb5/image-2.webp'
 
-  // Проверяем, что selectedCollection существует и имеет свойство photos
+  // проверяем, что selectedCollection существует и имеет свойство photos
   const imageUrls = selectedCollection?.photos?.length
     ? selectedCollection.photos.map((photo) => photo.path)
     : [defaultImageUrl]
@@ -26,7 +26,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
       <div className="relative w-full md:w-3/5 aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden mb-4 md:mb-0 flex-none">
         <ImageSlider images={imageUrls} />
 
-        {/* Проверка на наличие selectedCollection и его фотографий */}
+        {/* проверка на наличие selectedCollection и его фотографий */}
         {(!selectedCollection ||
           !selectedCollection.photos ||
           selectedCollection.photos.length === 0) && (

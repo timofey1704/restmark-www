@@ -75,3 +75,19 @@ export interface BreadcrumbsProps {
 export interface CallButtonProps {
   text: string
 }
+
+export interface CustomersProps {
+  customers: Customer[]
+}
+
+export interface ImageSliderProps {
+  images: string[]
+}
+
+export interface LeadPopupProps {
+  onClose: () => void
+}
+
+export interface LeadPopupContentProps {
+  onClose: () => void
+}

@@ -4,10 +4,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import store from '../../redux/store'
 import LeadPopupContent from './LeadPopupContent'
-
-interface LeadPopupProps {
-  onClose: () => void
-}
+import { LeadPopupProps } from '@/app/types'
 
 const LeadPopup: React.FC<LeadPopupProps> = ({ onClose }) => {
   return (

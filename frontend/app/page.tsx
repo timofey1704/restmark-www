@@ -1,8 +1,12 @@
 import React from 'react'
 import Banners from './components/ProductContainer/Banners'
 import Customers from './components/Customers/Customers'
+import { fetchBanners } from '@/lib/fetchBanners'
+import { fetchCustomers } from '@/lib/fetchCustomers'
 
-const Home = () => {
+export default async function Home() {
+  const titles = await fetchBanners()
+  const customers = await fetchCustomers()
   return (
     <main className="w-3/4 mx-auto">
       <div className="font-unbounded text-3xl font-semibold sm:text-4xl md:text-4xl lg:text-5xl mb-4 mt-7">
@@ -13,7 +17,7 @@ const Home = () => {
       <div className="py-2 font-velasans font-thin text-gray-300 mb-4 text-base lg:text-lg sm:text-sm">
         Мы помогаем реализовывать Ваши идеи
       </div>
-      <Banners />
+      <Banners titles={titles} />
 
       <div className="border-t border-gray-600 my-8"></div>
 
@@ -25,9 +29,7 @@ const Home = () => {
           Вы будете в хорошей компании
         </p>
       </div>
-      <Customers />
+      <Customers customers={customers} />
     </main>
   )
 }
-
-export default Home
