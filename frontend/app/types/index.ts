@@ -91,3 +91,12 @@ export interface LeadPopupProps {
 export interface LeadPopupContentProps {
   onClose: () => void
 }
+
+export type Seolinks = {
+  title: string
+  links: Links[]
+}
+type Links = {
+  href: string
+  label: string
+}

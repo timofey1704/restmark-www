@@ -3,7 +3,7 @@ from tastypie.resources import ModelResource
 from tastypie.resources import Resource
 from tastypie.exceptions import ImmediateHttpResponse
 from tastypie.authorization import Authorization
-from shop.models import Banners, Customers
+from shop.models import Banners, Customers, Seolinks
 import requests
 from django.conf import settings
 from tastypie.http import HttpBadRequest, HttpApplicationError, HttpCreated
@@ -26,7 +26,16 @@ class BannersResource(ModelResource):
         queryset = Banners.objects.all()
         resource_name = 'banners'
         allowed_methods = ['get']
-        
+
+class SitemapResource(ModelResource):
+    class Meta:
+        resource_name = 'seolinks'
+        object_class = None
+
+    def get_list(self, request, **kwargs):
+        # дергаем модель shop.seolinks
+        data = Seolinks.get_sitemap_data()
+        return self.create_response(request, data)     
 class CustomersResource(ModelResource):
     class Meta:
         queryset = Customers.objects.all()

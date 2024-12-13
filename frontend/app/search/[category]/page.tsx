@@ -22,7 +22,7 @@ export async function generateMetadata({
   const readableCategory = categoryDict[params.category] || params.category // получаем категорию из урла и форматируем, если такая есть в словаре
 
   return {
-    title: `Предлагаем Вам лучшие товары в категории ${readableCategory} - Restmark`,
+    title: `Restmark - Предлагаем Вам лучшие товары в категории ${readableCategory}`,
     description:
       'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
     keywords: [
@@ -34,7 +34,7 @@ export async function generateMetadata({
     ],
 
     openGraph: {
-      title: `Предлагаем Вам лучшие товары в категории ${readableCategory} - Restmark`,
+      title: `Restmark - Предлагаем Вам лучшие товары в категории ${readableCategory}`,
       description:
         'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
       url: `https://restmark.by/${params.category}`,
@@ -52,7 +52,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `Предлагаем Вам лучшие товары в категории ${readableCategory} - Restmark`,
+      title: `Restmark - Предлагаем Вам лучшие товары в категории ${readableCategory}`,
       description:
         'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
       images: [

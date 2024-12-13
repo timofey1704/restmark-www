@@ -1,6 +1,7 @@
 import os
 from django.db import models
 from django.conf import settings
+from collections import defaultdict
 
 
 # Create your models here.
@@ -113,3 +114,26 @@ class Photos(models.Model):
         else:
             self.filename = ''
             self.path = ''
+            
+class Seolinks(models.Model):
+    category = models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+    title = models.CharField(max_length=255, null=True, blank=True)
+
+    @classmethod
+    def get_sitemap_data(cls):
+        # получаем данные из базы
+        links = cls.objects.values('category', 'name', 'title')
+
+        # группируем по категориям
+        grouped_links = defaultdict(list)
+        for link in links:
+            grouped_links[link['category']].append({
+                "href": link['name'],
+                "label": link['title']
+            })
+
+        #cтруктурируем данные
+        sections = [{"title": category,"links": links} for category, links in grouped_links.items()]
+        return sections
+    
