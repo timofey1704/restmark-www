@@ -9,4 +9,5 @@ admin.site.register(models.Photos)
 
 admin.site.register(models.Banners)
 admin.site.register(models.Customers)
+admin.site.register(models.Seolinks)
 # admin.site.register(models.Texts)
