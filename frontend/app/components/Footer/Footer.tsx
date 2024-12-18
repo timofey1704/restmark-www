@@ -35,6 +35,13 @@ export default function Footer() {
                 Каталоги
               </a>
             </h3>
+            <ul className="text-gray-400">
+              <li className="mb-2">
+                <Link href="/sitemap" className="hover:underline">
+                  Карта сайта
+                </Link>
+              </li>
+            </ul>
           </div>
 
           <div className="w-full md:w-1/4">

@@ -136,4 +136,9 @@ class Seolinks(models.Model):
         #cтруктурируем данные
         sections = [{"title": category,"links": links} for category, links in grouped_links.items()]
         return sections
+    class Meta:
+        verbose_name = "Seo link"
+        verbose_name_plural = "Seo links"
+    def __str__(self):
+        return f'{self.category} - {self.title}'
     
