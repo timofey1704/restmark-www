@@ -37,7 +37,7 @@ export async function generateMetadata({
       title: `Restmark - Предлагаем Вам лучшие товары в категории ${readableCategory}`,
       description:
         'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
-      url: `https://restmark.by/${params.category}`,
+      url: `https://restmark.by/search/${params.category}`,
       siteName: 'Restmark',
       images: [
         {

@@ -47,8 +47,6 @@ export const metadata: Metadata = {
   },
 }
 
-// export const revalidate = 2592000 // 30 дней
-
 export default async function Sitemap() {
   const sections = (await fetchSitemapLinks()) || []
 
