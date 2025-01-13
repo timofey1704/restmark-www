@@ -114,6 +114,9 @@ class Photos(models.Model):
         else:
             self.filename = ''
             self.path = ''
+    
+    def __str__(self):
+        return f'{self.collection_id - self.filename}'
             
 class Seolinks(models.Model):
     category = models.CharField(max_length=255, null=True, blank=True)
