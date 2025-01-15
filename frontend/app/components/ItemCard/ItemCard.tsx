@@ -61,7 +61,11 @@ const ItemCard: React.FC<ItemCardProps> = ({
                   name="collection"
                   checked={selectedCollection.id === collection.id}
                   onChange={() => setSelectedCollection(collection)}
-                  className="mr-2"
+                  className="mr-2 h-4 w-4 cursor-pointer
+                    appearance-none rounded-full border-2 border-gray-400
+                    checked:border-blue-500 checked:bg-blue-500
+                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                    focus:ring-offset-green"
                 />
                 {collection.name}
               </label>

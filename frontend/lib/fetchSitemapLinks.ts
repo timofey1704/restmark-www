@@ -10,7 +10,6 @@ export async function fetchSitemapLinks(): Promise<Seolinks[]> {
     }
 
     const data = await res.json()
-    console.log(data)
     if (!data) {
       console.error('Invalid data structure received:', data)
       throw new Error('Invalid data structure received')
