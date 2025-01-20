@@ -79,37 +79,38 @@ class TelegramMessageResource(Resource):
             )
 
 class SearchResource(Resource):
-
     class Meta:
         resource_name = 'items'
-        allowed_methods = ['get']
+        allowed_methods = ['get', 'post']
+        authorization = Authorization()
 
     def get_list(self, request, **kwargs):
         
         sql_query = """
             SELECT
-          p.id AS product_id,
-          p.title,
-          p.country_prod,
-          p.category,
-          p.pdf,
-          c.id AS collection_id,
-          c.name AS collection_name,
-          c.price,
-          c.discount_price,
-          c.discount_percent,
-          c.collection_url,
-          ph.id AS photo_id,
-          ph.filename,
-          ph.path
-        FROM
-          products p
-        LEFT JOIN
-          collections c ON p.id = c.product_id
-        LEFT JOIN
-          photos ph ON c.id = ph.collection_id
-        ORDER BY
-          p.id, c.id, ph.id;
+              p.id AS product_id,
+              p.title,
+              p.country_prod,
+              p.category,
+              p.pdf,
+              p.order,
+              c.id AS collection_id,
+              c.name AS collection_name,
+              c.price,
+              c.discount_price,
+              c.discount_percent,
+              c.collection_url,
+              ph.id AS photo_id,
+              ph.filename,
+              ph.path
+            FROM
+              products p
+            LEFT JOIN
+              collections c ON p.id = c.product_id
+            LEFT JOIN
+              photos ph ON c.id = ph.collection_id
+            ORDER BY
+              p.order, p.id, c.order, c.id, ph.id;
         """
         
         # SQL запрос в базу
@@ -165,3 +166,29 @@ class SearchResource(Resource):
 
         
         return JsonResponse(result, safe=False)
+
+    def obj_create(self, bundle, **kwargs):
+        try:
+            updated_items = bundle.data.get('updatedItems', [])
+            
+            # обновляем порядок для продуктов
+            with connection.cursor() as cursor:
+                for item in updated_items:
+                    product_id = item[0]
+                    new_order = abs(int(item[1]))  # только положительные числа!
+                    
+                    cursor.execute(
+                        """
+                        UPDATE products 
+                        SET "order" = %s 
+                        WHERE id = %s
+                        """,
+                        [new_order, product_id]
+                    )
+            
+            return self.create_response(bundle.request, {'status': 'success'})
+        except Exception as e:
+            raise ImmediateHttpResponse(HttpBadRequest(str(e)))
+
+    def create_response(self, request, data):
+        return self.get_list(request)
