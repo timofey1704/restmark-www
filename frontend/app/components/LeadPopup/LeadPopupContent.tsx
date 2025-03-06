@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, ChangeEvent } from 'react'
-import InputMask from 'react-input-mask-next'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
 import { toast } from 'react-hot-toast'
@@ -93,10 +92,9 @@ const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
               Контактный телефон:
             </label>
             <div className="relative">
-              <InputMask
-                mask="+375 (99) 999-99-99"
+              <input
+                type="tel"
                 placeholder="+375 (__) ___-__-__"
-                type="text"
                 id="phone"
                 value={phone}
                 onChange={handlePhoneChange}

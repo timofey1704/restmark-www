@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'tastypie',
     'corsheaders',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'adminsortable2',
 ]
 
