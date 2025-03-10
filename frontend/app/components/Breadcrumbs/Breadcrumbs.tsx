@@ -37,7 +37,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ category }) => {
           <>
             <BreadcrumbItem className="font-velasans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white">
               <BreadcrumbLink
-                href={`/search/${category}`}
+                href={`/frontend/app/(urls)/search/${category}`}
                 className="font-velasans text-sm sm:text-sm md:text-lg lg:text-xl hover:text-white"
               >
                 {displayName}

@@ -12,6 +12,7 @@ django-cors-headers = "*"
 python-dotenv = "*"
 requests = "*"
 pillow = "*"
+django-rest-framework = "*"
 django-admin-sortable2 = "*"
 
 [dev-packages]

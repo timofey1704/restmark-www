@@ -1,16 +1,18 @@
+'use client'
+
 import dynamic from 'next/dynamic'
 import React from 'react'
 import { Metadata } from 'next'
 
 // динамический импорт MapComponent
 const MapComponent = dynamic(
-  () => import('../components/MapContainer/MapComponent'),
+  () => import('../../components/MapContainer/MapComponent'),
   {
     ssr: false, // отключаем серверный рендеринг для компонента
   }
 )
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: 'Связаться с нами - Restmark',
   description:
     'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',

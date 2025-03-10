@@ -1,9 +1,10 @@
 import { Seolinks } from '@/app/types'
 
 export async function fetchSitemapLinks(): Promise<Seolinks[]> {
-  const API_URL = 'https://restmark.by/api/v1'
+  // const API_URL = 'https://restmark.by/api/v1'
+  const API_URL = 'http://127.0.0.1:8000/api/v1'
   try {
-    const res = await fetch(`${API_URL}/seolinks/`)
+    const res = await fetch(`${API_URL}/sitemap/`)
 
     if (!res.ok) {
       throw new Error('Failed to fetch data')
