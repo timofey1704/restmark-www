@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'shop.apps.ShopConfig',
     'api.apps.ApiConfig',
-    'tastypie',
     'corsheaders',
     # 'django.contrib.sites',
     'adminsortable2',

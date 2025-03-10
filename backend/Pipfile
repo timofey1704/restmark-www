@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 django = "*"
 pycodestyle = "*"
-django-tastypie = "*"
 psycopg = "*"
 django-cors-headers = "*"
 python-dotenv = "*"
