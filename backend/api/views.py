@@ -66,14 +66,6 @@ class SearchView(APIView):
     def get(self, request):
         try:
             products = Products.objects.all()
-            
-            # Отладочный вывод
-            for product in products:
-                print(f"Product: {product.title}")
-                for collection in product.collections.all():
-                    print(f"  Collection: {collection.name}")
-                    print(f"  Fields: {collection.__dict__}")
-            
             serializer = ProductSerializer(products, many=True)
             return Response(serializer.data)
             

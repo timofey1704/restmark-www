@@ -1,13 +1,14 @@
 
 from django.contrib import admin
 from . import models
+from adminsortable2.admin import SortableAdminMixin
 
 class CollectionInline(admin.TabularInline):
     model = models.Collections
     extra = 0
     fields = ('name', 'price', 'discount_price', 'discount_percent', 'collection_url')
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [CollectionInline]
     list_display = ('title', 'category', 'country_prod')
     list_filter = ('category',)

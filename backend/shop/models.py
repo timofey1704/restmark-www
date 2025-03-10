@@ -47,11 +47,13 @@ class Products(models.Model):
     sales_available = models.BooleanField(default=False)
     category = models.CharField(max_length=50, null=True, blank=True)
     pdf = models.CharField(max_length=255, null=True, blank=True)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
     
     class Meta:
         db_table = 'products'
         verbose_name = "Product"
         verbose_name_plural = "Products"
+        ordering = ['order']  # cортируем по этому полю
     
     def __str__(self):
         return self.title
