@@ -63,10 +63,19 @@ class TelegramMessageView(APIView):
             )
 
 class SearchView(APIView):
-    def get(self, request):
+    def get(self, request, category=None):
         try:
-            products = Products.objects.all()
-            serializer = ProductSerializer(products, many=True)
+            # базовый queryset
+            queryset = Products.objects.all()
+            
+            # отдаем только категорию, если ее получили
+            if category:
+                queryset = queryset.filter(category=category)
+            
+            # сортируем по полю order
+            queryset = queryset.order_by('order')
+            
+            serializer = ProductSerializer(queryset, many=True)
             return Response(serializer.data)
             
         except Exception as e:

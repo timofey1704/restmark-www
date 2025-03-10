@@ -14,12 +14,10 @@ const categoryDict: { [key: string]: string } = {
 }
 
 // генерируем метаданные динамически
-export async function generateMetadata(
-  props: {
-    params: Promise<{ category: string }>
-  }
-): Promise<Metadata> {
-  const params = await props.params;
+export async function generateMetadata(props: {
+  params: Promise<{ category: string }>
+}): Promise<Metadata> {
+  const params = await props.params
   const readableCategory = categoryDict[params.category] || params.category // получаем категорию из урла и форматируем, если такая есть в словаре
 
   return {
@@ -76,8 +74,8 @@ export async function generateMetadata(
 }
 
 const SearchPage = async (props: { params: Promise<{ category: string }> }) => {
-  const params = await props.params;
-  const products = await fetchProducts()
+  const params = await props.params
+  const products = await fetchProducts(params.category)
 
   //фильтруем по категории
   const filteredProducts = products.filter(
