@@ -13,6 +13,7 @@ python-dotenv = "*"
 requests = "*"
 pillow = "*"
 django-admin-sortable2 = "*"
+django-rest-framework = "*"
 
 [dev-packages]
 

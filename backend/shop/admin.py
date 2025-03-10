@@ -1,15 +1,15 @@
-from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
+
 from django.contrib import admin
 from . import models
 
-class CollectionInline(SortableInlineAdminMixin, admin.TabularInline):
+class CollectionInline(admin.TabularInline):
     model = models.Collections
     extra = 0
-    fields = ('name', 'price', 'discount_price', 'discount_percent', 'collection_url', 'order')
+    fields = ('name', 'price', 'discount_price', 'discount_percent', 'collection_url')
 
-class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     inlines = [CollectionInline]
-    list_display = ('title', 'category', 'country_prod', 'order')
+    list_display = ('title', 'category', 'country_prod')
     list_filter = ('category',)
     search_fields = ('title', 'category')
 

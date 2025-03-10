@@ -47,13 +47,11 @@ class Products(models.Model):
     sales_available = models.BooleanField(default=False)
     category = models.CharField(max_length=50, null=True, blank=True)
     pdf = models.CharField(max_length=255, null=True, blank=True)
-    order = models.IntegerField(default=0)
     
     class Meta:
         db_table = 'products'
         verbose_name = "Product"
         verbose_name_plural = "Products"
-        ordering = ['order']
     
     def __str__(self):
         return self.title
@@ -66,13 +64,11 @@ class Collections (models.Model):
     discount_price = models.CharField(max_length=255, null=True, blank=True)
     discount_percent = models.CharField(max_length=255, null=True, blank=True)
     collection_url = models.CharField(max_length=255, null=True, blank=True, db_column='collection_url')
-    order = models.IntegerField(default=0)
     
     class Meta:
         db_table = 'collections'
         verbose_name = "Collection"
         verbose_name_plural = "Collections"
-        ordering = ['order']
     
     def __str__(self):
         return f'{self.product_id.title} - {self.name}'
