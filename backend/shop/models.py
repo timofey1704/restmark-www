@@ -58,7 +58,12 @@ class Products(models.Model):
 
 #public.collections    
 class Collections (models.Model):
-    product_id = models.ForeignKey(Products, on_delete=models.CASCADE, db_column='product_id')
+    product = models.ForeignKey(
+        Products,
+        null=True,
+        related_name='collections',  # это имя должно совпадать с prefetch_related
+        on_delete=models.CASCADE
+    )
     name = models.CharField(max_length=255)
     price = models.CharField(max_length=255, null=True, blank=True)
     discount_price = models.CharField(max_length=255, null=True, blank=True)
@@ -71,7 +76,7 @@ class Collections (models.Model):
         verbose_name_plural = "Collections"
     
     def __str__(self):
-        return f'{self.product_id.title} - {self.name}'
+        return f'{self.product} - {self.name}'
     
     def get_photos(self):
         return self.photos.all() if self.photos.exists() else []
@@ -83,7 +88,12 @@ def upload_to(instance, filename):
     return f'uploads/{filename}'
 
 class Photos(models.Model):
-    collection_id = models.ForeignKey(Collections, on_delete=models.CASCADE, db_column='collection_id')
+    collection = models.ForeignKey(
+        Collections,
+        null=True,
+        related_name='photos',  # имя должно совпадать с вложенным prefetch_related
+        on_delete=models.CASCADE
+    )
     image = models.ImageField(upload_to=upload_to, null=True, blank=True)
     filename = models.CharField(max_length=255, blank=True)
     path = models.CharField(max_length=255, blank=True)
@@ -106,7 +116,7 @@ class Photos(models.Model):
             self.path = ''
     
     def __str__(self):
-        return f'{self.collection_id} - {self.filename}'
+        return f'{self.collection} - {self.filename}'
             
 class Seolinks(models.Model):
     category = models.CharField(max_length=255, null=True, blank=True)

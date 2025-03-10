@@ -1,10 +1,12 @@
 import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 from shop.models import Banners, Customers, Seolinks
-from .serializers import BannersMainSerializer, CustomersMainSerializer, TelegramMessageSerializer
+from .serializers import BannersMainSerializer, CustomersMainSerializer, TelegramMessageSerializer, ProductSerializer
 from django.conf import settings
+from django.db.models import Prefetch
+from shop.models import Products, Collections, Photos
 
 class MainPageView(APIView):
     def get(self, request):
@@ -60,3 +62,23 @@ class TelegramMessageView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+class SearchView(APIView):
+    def get(self, request):
+        try:
+            products = Products.objects.all()
+            
+            # Отладочный вывод
+            for product in products:
+                print(f"Product: {product.title}")
+                for collection in product.collections.all():
+                    print(f"  Collection: {collection.name}")
+                    print(f"  Fields: {collection.__dict__}")
+            
+            serializer = ProductSerializer(products, many=True)
+            return Response(serializer.data)
+            
+        except Exception as e:
+            return Response(
+                {'error': str(e)}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
