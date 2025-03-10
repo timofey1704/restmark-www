@@ -1,3 +1,8 @@
+export interface MainPageData {
+  banners: TitleItem[]
+  customers: Customer[]
+}
+
 export type TitleItem = {
   id?: number
   title: string

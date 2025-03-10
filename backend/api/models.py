@@ -19,29 +19,8 @@ from django.http import JsonResponse
 # products?
 # sales?
 # send-message
-# texts
-
-class BannersResource(ModelResource):
-    class Meta:
-        queryset = Banners.objects.all()
-        resource_name = 'banners'
-        allowed_methods = ['get']
-
-class SitemapResource(ModelResource):
-    class Meta:
-        resource_name = 'seolinks'
-        object_class = None
-
-    def get_list(self, request, **kwargs):
-        # дергаем модель shop.seolinks
-        data = Seolinks.get_sitemap_data()
-        return self.create_response(request, data)     
-class CustomersResource(ModelResource):
-    class Meta:
-        queryset = Customers.objects.all()
-        resource_name = 'customers'
-        allowed_methods = ['get']
-        
+# texts 
+   
 class TelegramMessageResource(Resource):
     class Meta:
         resource_name = 'send-message'
