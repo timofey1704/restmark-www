@@ -9,7 +9,9 @@ import { showSuccess, showError } from '../../redux/slices/notificationSlice'
 import { LeadPopupContentProps } from '@/app/types'
 
 const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL
+  const API_URL = 'https://restmark.by/api/v1'
+  // const API_URL = 'http://127.0.0.1:8000/api/v1'
+
   const [clientName, setClientName] = useState('')
   const [phone, setPhone] = useState('')
   const [isClientNameEmpty, setIsClientNameEmpty] = useState(true)
@@ -28,7 +30,7 @@ const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
     try {
       await dispatch(
         sendLead({
-          url: `${API_URL}/send-message`,
+          url: `${API_URL}/send-message/`,
           data: leadDetails,
         })
       )

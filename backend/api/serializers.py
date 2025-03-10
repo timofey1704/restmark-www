@@ -18,4 +18,6 @@ class SeoLinksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Seolinks
         fields = "__all__"
-        
+
+class TelegramMessageSerializer(serializers.Serializer):
+    message = serializers.CharField(required=True)

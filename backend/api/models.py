@@ -154,7 +154,7 @@ class SearchResource(Resource):
             with connection.cursor() as cursor:
                 for item in updated_items:
                     product_id = item[0]
-                    new_order = abs(int(item[1]))  # только положительные числа!
+                  
                     
                     cursor.execute(
                         """
@@ -162,7 +162,7 @@ class SearchResource(Resource):
                         SET "order" = %s 
                         WHERE id = %s
                         """,
-                        [new_order, product_id]
+                        [product_id]
                     )
             
             return self.create_response(bundle.request, {'status': 'success'})

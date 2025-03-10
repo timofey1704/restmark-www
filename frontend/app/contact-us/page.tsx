@@ -1,3 +1,5 @@
+'use client'
+
 import dynamic from 'next/dynamic'
 import React from 'react'
 import { Metadata } from 'next'
@@ -10,7 +12,7 @@ const MapComponent = dynamic(
   }
 )
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: 'Связаться с нами - Restmark',
   description:
     'Свяжитесь с нами для покупки и оснащения ресторанов, баров и кафе в Беларуси.',
