@@ -6,7 +6,7 @@ import { Metadata } from 'next'
 
 // динамический импорт MapComponent
 const MapComponent = dynamic(
-  () => import('../components/MapContainer/MapComponent'),
+  () => import('../../components/MapContainer/MapComponent'),
   {
     ssr: false, // отключаем серверный рендеринг для компонента
   }

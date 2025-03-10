@@ -1,6 +1,6 @@
 import React from 'react'
-import ItemCard from '../../components/ItemCard/ItemCard'
-import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
+import ItemCard from '../../../components/ItemCard/ItemCard'
+import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
 import { fetchProducts } from '@/lib/fetchProducts'
 import { Metadata } from 'next'
 
