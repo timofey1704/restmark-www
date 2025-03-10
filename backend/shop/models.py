@@ -71,12 +71,13 @@ class Collections (models.Model):
     discount_price = models.CharField(max_length=255, null=True, blank=True)
     discount_percent = models.CharField(max_length=255, null=True, blank=True)
     collection_url = models.CharField(max_length=255, null=True, blank=True, db_column='collection_url')
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
     
     class Meta:
         db_table = 'collections'
         verbose_name = "Collection"
         verbose_name_plural = "Collections"
-    
+        ordering = ['order']  # cортируем по этому полю
     def __str__(self):
         return f'{self.product} - {self.name}'
     

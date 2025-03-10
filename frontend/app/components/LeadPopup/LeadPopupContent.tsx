@@ -1,11 +1,7 @@
 'use client'
 
 import React, { useState, ChangeEvent } from 'react'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../../redux/store'
-import { toast } from 'react-hot-toast'
-import { sendLead } from '../../redux/slices/leadSlice'
-import { showSuccess, showError } from '../../redux/slices/notificationSlice'
+import showToast from '@/components/ui/Toast'
 import { LeadPopupContentProps } from '@/app/types'
 
 const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
@@ -15,11 +11,14 @@ const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
   const [clientName, setClientName] = useState('')
   const [phone, setPhone] = useState('')
   const [isClientNameEmpty, setIsClientNameEmpty] = useState(true)
-  const dispatch = useDispatch<AppDispatch>()
 
   const handleTelegramRequest = async () => {
     if (!phone || !phone) {
-      toast.error('Поля не могут быть пустыми!', { icon: '❗️' })
+      showToast({
+        type: 'error',
+        message: 'Поля не могут быть пустыми',
+        duration: 800,
+      })
       return
     }
 
@@ -28,27 +27,33 @@ const LeadPopupContent: React.FC<LeadPopupContentProps> = ({ onClose }) => {
     }
 
     try {
-      await dispatch(
-        sendLead({
-          url: `${API_URL}/send-message/`,
-          data: leadDetails,
-        })
-      )
+      const response = await fetch(`${API_URL}/send-message/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(leadDetails),
+      })
+
+      if (!response.ok) {
+        throw new Error('Ошибка при отправке сообщения')
+      }
+
       onClose()
-      dispatch(
-        showSuccess({
-          message: 'Заявка успешно отправлена!',
-          position: 'top-center',
-        })
-      )
+
+      showToast({
+        type: 'success',
+        message: 'Заявка успешно отправлена!',
+        duration: 800,
+      })
     } catch (error) {
       console.error('Ошибка при отправке сообщения:', error)
-      dispatch(
-        showError({
-          message: 'Ошибка при отправке сообщения',
-          position: 'top-center',
-        })
-      )
+
+      showToast({
+        type: 'error',
+        message: 'Ошибка при отправке сообщения',
+        duration: 800,
+      })
     }
   }
 

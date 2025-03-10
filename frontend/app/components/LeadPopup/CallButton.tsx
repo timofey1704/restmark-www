@@ -1,29 +1,26 @@
 'use client'
 
 import React, { useState } from 'react'
-import LeadPopup from '../LeadPopup/LeadPopup'
+import LeadPopupContent from './LeadPopupContent'
 import { CallButtonProps } from '@/app/types'
 
 const CallButton: React.FC<CallButtonProps> = ({ text }) => {
-  const [isPopupVisible, setPopupVisible] = useState(false)
-
-  const handleOpenPopup = () => {
-    setPopupVisible(true)
-  }
-
-  const handleClosePopup = () => {
-    setPopupVisible(false)
-  }
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
-      {isPopupVisible && <LeadPopup onClose={handleClosePopup} />}
       <button
-        className="mt-2 px-2 py-1 text-opacity-70 text-white rounded-lg underline"
-        onClick={handleOpenPopup}
+        onClick={() => setIsOpen(true)}
+        className="text-gray-300 hover:text-white transition-colors underline"
       >
         {text}
       </button>
+
+      {isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <LeadPopupContent onClose={() => setIsOpen(false)} />
+        </div>
+      )}
     </>
   )
 }

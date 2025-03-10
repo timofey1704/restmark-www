@@ -1,19 +1,25 @@
 'use client'
 
-import React from 'react'
-import { Provider } from 'react-redux'
-import store from '../../redux/store'
+import { useState } from 'react'
 import LeadPopupContent from './LeadPopupContent'
-import { LeadPopupProps } from '@/app/types'
 
-const LeadPopup: React.FC<LeadPopupProps> = ({ onClose }) => {
+export default function LeadPopup() {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <Provider store={store}>
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <LeadPopupContent onClose={onClose} />
-      </div>
-    </Provider>
+    <>
+      <button
+        onClick={() => setIsOpen(true)}
+        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+      >
+        Оставить заявку
+      </button>
+
+      {isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <LeadPopupContent onClose={() => setIsOpen(false)} />
+        </div>
+      )}
+    </>
   )
 }
-
-export default LeadPopup
