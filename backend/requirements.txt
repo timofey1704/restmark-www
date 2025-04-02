@@ -1,7 +1,7 @@
 asgiref==3.8.1
 certifi==2025.1.31
 charset-normalizer==3.4.1
-Django==5.1.7
+Django==5.1.8
 django-admin-sortable2==2.2.4
 django-cors-headers==4.7.0
 django-rest-framework==0.1.0
