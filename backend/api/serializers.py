@@ -50,7 +50,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'country_prod', 
             'category', 
             'pdf', 
-            'collections',
             'seo_texts',
+            'collections',
         ]
     
