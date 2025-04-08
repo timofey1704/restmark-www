@@ -48,6 +48,7 @@ class Products(models.Model):
     category = models.CharField(max_length=50, null=True, blank=True)
     pdf = models.CharField(max_length=255, null=True, blank=True)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    seo_texts = models.TextField(null=True, blank=True)
     
     class Meta:
         db_table = 'products'

@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 import ImageSlider from '../ImagesSlider/ImagesSlider'
 import { ItemCardProps, Collection } from '../../types'
 import CallButton from '../LeadPopup/CallButton'
+import ShowMore from '../ShowMore/ShowMore'
 
 const ItemCard: React.FC<ItemCardProps> = ({
   brandName,
   collections,
   collection_url,
   catalog_url,
+  seo_texts,
 }) => {
   const [selectedCollection, setSelectedCollection] = useState<Collection>(
     collections[0]
@@ -43,7 +45,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
       </div>
 
       <div className="flex flex-col flex-grow md:ml-8 justify-between">
-        <div>
+        <div className="space-y-5">
           <h2 className="text-3xl md:text-4xl 2xl:text-5xl font-unbounded font-bold mb-4 pl-1 sm:pl-2">
             {brandName}
           </h2>
@@ -71,6 +73,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
               </label>
             ))}
           </div>
+          <ShowMore text={seo_texts} />
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4">

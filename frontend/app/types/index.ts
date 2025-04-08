@@ -40,6 +40,7 @@ export interface Product {
   collections: Collection[]
   pdf: string
   collection_url?: string
+  seo_texts?: string
 }
 
 export interface ItemCardProps {
@@ -47,6 +48,7 @@ export interface ItemCardProps {
   collections: Collection[]
   catalog_url: string
   collection_url?: string
+  seo_texts?: string
 }
 
 export interface Lead {

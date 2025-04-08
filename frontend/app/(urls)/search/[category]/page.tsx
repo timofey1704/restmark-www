@@ -77,11 +77,6 @@ const SearchPage = async (props: { params: Promise<{ category: string }> }) => {
   const params = await props.params
   const products = await fetchProducts(params.category)
 
-  //фильтруем по категории
-  const filteredProducts = products.filter(
-    (product) => product.category === params.category
-  )
-
   return (
     <div className="w-3/4 mx-auto">
       <Breadcrumbs category={params.category} />
@@ -91,13 +86,14 @@ const SearchPage = async (props: { params: Promise<{ category: string }> }) => {
 
       <div className="min-h-screen bg-black text-white py-10">
         <div className="grid grid-cols-1">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
+          {products.length > 0 ? (
+            products.map((product) => (
               <ItemCard
                 key={product.id}
                 brandName={product.title}
                 collections={product.collections}
                 catalog_url={`${product.pdf}`}
+                seo_texts={product.seo_texts}
               />
             ))
           ) : (
